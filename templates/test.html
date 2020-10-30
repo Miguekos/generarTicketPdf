@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+    table,
+    th,
+    td {
+      border-bottom: 1px solid black;
+    }
+
+    body {
+      width: 99%;
+    }
+
+    </style>
+</head>
+
+<body>
+<table style="width:100%">
+    <tr>
+        <td><img src="https://devtexcargo.apps.com.pe/img/logo2.5e1cb6a8.png" alt="logo" width="100"></td>
+        <td style="text-align: right;"><img src="{{ qr }}" alt="logo" width="100"></td>
+    </tr>
+    <tr>
+        <td>Comuna</td>
+        <td style="text-align: right;"> {{json['registro']['comuna']}}</td>
+    </tr>
+    <tr>
+        <td>Nombre</td>
+        <td style="text-align: right;">{{json['registro']['name']}} {{json['registro']['lastname']}}</td>
+    </tr>
+    <tr>
+        <td>Direccion</td>
+        <td style="text-align: right;">{{json['registro']['direccion']}}</td>
+    </tr>
+    <tr>
+        <td>Telf.</td>
+        <td style="text-align: right;">{{json['registro']['telf']}}</td>
+    </tr>
+    <tr>
+        <td>Tipo de pago</td>
+        <td style="text-align: right;">{{json['registro']['tipodepago']}}</td>
+    </tr>
+    <tr>
+        <td>Valor de flete</td>
+        <td style="text-align: right;">{{json['registro']['valordeflete']}}</td>
+    </tr>
+    <tr>
+        <td>Control</td>
+        <td style="text-align: right;">{{json['registro']['control']}}</td>
+    </tr>
+    <tr>
+        <td>Proveedores</td>
+        <td style="text-align: right;">{{json['registro']['proveedores']}}</td>
+    </tr>
+    <tr>
+        <td style="text-align: center;">Orden: {{ json['registro']['registro'] }}</td>
+        <td style="text-align: center;">{{ json['registro']['created_at']}}</td>
+    </tr>
+
+</table>
+
+</body>
+
+</html>

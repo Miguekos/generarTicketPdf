@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #tableGrande,
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    #tableGrande {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    #table,
+    td,
+    th {
+      border: 1px solid black;
+    }
+
+    #table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    /* th {
+      height: 30px;
+    } */
+
+    * {
+      box-sizing: border-box;
+    }
+
+    /* Create two equal columns that floats next to each other */
+    .column {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 120px;
+      /* Should be removed. Only for demonstration */
+    }
+
+    .column2 {
+      float: left;
+      width: 50%;
+      padding: 10px;
+      height: 250px;
+      /* Should be removed. Only for demonstration */
+    }
+
+    /* Clear floats after the columns */
+    .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .cuadros {
+      background-color: #aaa;
+      text-align: center;
+    }
+
+    .cuadros2 {
+      /* background-color: #aaa; */
+      text-align: left;
+    }
+
+    .columnastablas {
+      width: 50%;
+    }
+
+    .columnastablas1 {
+      width: 50%;
+      text-align: center;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div>
+    <!-- <img src="acceso.png" alt="Acceso" width="200"> -->
+  </div>
+
+  <h2>Hola [CLIENTE ACCESO]</h2>
+  <p>[TIPO DE DOCUMENTO] N°: XXXXXXXX</p>
+  <p>Queremos contarte todo lo que necesitas saber sobre el estado de tu Cuenta</p>
+
+  <div class="row">
+    <div class="column cuadros">
+      <h2><u>Código de crédito:</u></h2>
+      <p>C2598009</p>
+    </div>
+    <div class="column cuadros">
+      <h2> <u> Estado de Cuenta al:</u></h2>
+      <p>20/08/2020</p>
+    </div>
+  </div>
+
+  <div style="border-bottom: 2px solid black;">
+    <p>Información sobre su pago</p>
+  </div>
+
+  <br>
+
+  <div class="row">
+    <div class="column2 cuadros2">
+      <table id="table" style="width:100%">
+        <tr>
+          <td class="columnastablas">Monto del crédito</td>
+          <td class="columnastablas1">Smith</td>
+        </tr>
+        <tr style="">
+          <td>Saldo de capital</td>
+          <td class="columnastablas1">Jackson</td>
+        </tr>
+        <tr>
+          <td>Moneda</td>
+          <td class="columnastablas1">Doe</td>
+
+        </tr>
+      </table>
+
+      <br>
+
+      <table id="table" style="width:100%">
+        <tr>
+          <td class="columnastablas">Plazo del crédito</td>
+          <td class="columnastablas1">Smith</td>
+
+        </tr>
+        <tr>
+          <td>Plazo del crédito</td>
+          <td class="columnastablas1">Jackson</td>
+
+        </tr>
+        <tr>
+          <td>Cuotas por pagar</td>
+          <td class="columnastablas1">Doe</td>
+
+        </tr>
+      </table>
+
+      <br>
+
+      <table id="table" style="width:100%">
+        <tr>
+          <td class="columnastablas">Tasa de Interés </td>
+          <td class="columnastablas1">Smith</td>
+        </tr>
+        <tr>
+          <td>TCEA</td>
+          <td class="columnastablas1">Jackson</td>
+
+        </tr>
+      </table>
+    </div>
+    <div class="column cuadros2">
+      <table id="table" style="width:100%">
+        <tr>
+          <th class="columnastablas">Cuota del mes</th>
+        </tr>
+        <tr>
+          <td>Capital</td>
+          <td class="columnastablas1">Smith</td>
+        </tr>
+        <tr>
+          <td>Intereses</td>
+          <td class="columnastablas1">Jackson</td>
+        </tr>
+        <tr>
+          <td>Seguro desgravamen</td>
+          <td class="columnastablas1">Doe</td>
+        </tr>
+
+        <tr>
+          <td>Total cuota del mes</td>
+          <td class="columnastablas1">Doe</td>
+        </tr>
+
+        <tr>
+          <td>Deuda atrasada</td>
+          <td class="columnastablas1">Doe</td>
+        </tr>
+
+        <tr>
+          <td>Monto a pagar</td>
+          <td class="columnastablas1">Doe</td>
+        </tr>
+
+        <tr>
+          <td>Próxima cuota a vencer</td>
+          <td class="columnastablas1">Doe</td>
+        </tr>
+
+
+      </table>
+
+      <br>
+
+    </div>
+  </div>
+
+  <div style="border-bottom: 2px solid black;">
+    <p>Detalle de operaciones en el mes</p>
+  </div>
+
+  <br>
+
+  <table id="tableGrande">
+    <tr>
+      <th style="width: 20%">Fecha de abono </th>
+      <th style="width: 60%">Concepto de Abono</th>
+      <th style="width: 20%">Abonos</th>
+    </tr>
+    <tr>
+      <td>Peter</td>
+      <td>Griffin</td>
+      <td>$100</td>
+    </tr>
+    <tr>
+      <td>Lois</td>
+      <td>Griffin</td>
+      <td>$150</td>
+    </tr>
+    <tr>
+      <td>Joe</td>
+      <td>Swanson</td>
+      <td>$300</td>
+    </tr>
+    <tr>
+      <td>Cleveland</td>
+      <td>Brown</td>
+      <td>$250</td>
+    </tr>
+  </table>
+
+  <div style="border-bottom: 2px solid black;">
+    <p>Cuotas de los próximos seis (06) meses</p>
+  </div>
+
+  <br>
+
+  <table id="tableGrande">
+    <tr>
+      <td>Peter</td>
+      <td>Griffin</td>
+      <td>$100</td>
+      <td>Peter</td>
+      <td>Griffin</td>
+      <td>$100</td>
+    </tr>
+    <tr>
+      <td>Lois</td>
+      <td>Griffin</td>
+      <td>$150</td>
+      <td>Lois</td>
+      <td>Griffin</td>
+      <td>$150</td>
+    </tr>
+  </table>
+
+  <div>
+    <p>
+      (1) El envío del presente documento sea realiza a solicitud del Cliente, por lo que la no recepción del Estado de
+      Crédito de forma mensual no te exime de efectuar el pago del mes oportunamente ya que se trata de un crédito bajo
+      el sistema de cuotas, no revolvente.
+      (2) La tasa de interés compensatorio es la vigente del crédito, y se encuentra expresada en un año base de 360
+      días.
+      (3) Tasa de costo efectiva anual (TCEA) calculada en base a 360 días
+      (4) Los abonos realizadas a través de bancos y recaudos de estaciones de gas no se reflejan inmediatamente y puede
+      tomar entre 2 a 3 días hábiles. Asimismo, dependerá del tiempo de informe de la entidad recaudadora. Esto monto
+      podrá ser modificado en caso se presente una controversia por duplicidad de pagos.
+      (5) El abono total es aplicado a la cuota del mes, de existir un saldo pendiente en el monto de la cuota deberá
+      ser cancelado hasta el último día de su vencimiento a fin que no incurrir en mora o incumplimiento de pago. Por
+      otro lado, el Cliente tiene derecho a efectuar pagos anticipados de las cuotas o saldos en forma total o parcial,
+      con la consiguiente reducción de intereses, comisiones y gastos al día de pago, conforme señala su contrato y
+      cronograma de pagos.
+      Si tienes cualquier reclamo, consulta o requieres mayor información sobre nuestros productos y servicios, puedes
+      acudir a nuestras agencias o Canales de Atención: Teléfono (01) 605-5555 o por nuestra página web acceso.com.pe.
+      El plazo para atender el reclamo es de 30 días calendarios, el cual puede ser extendido por otro igual cuando la
+      naturaleza del reclamo lo justifique, situación que es puesta en conocimiento del consumidor antes de la
+      culminación del plazo inicial, sin perjuicio de que puedas recurrir a las oficinas de Indecopi, Defensor del
+      Cliente Financiero o de la SBS.
+
+    </p>
+  </div>
+
+</body>
+
+</html>

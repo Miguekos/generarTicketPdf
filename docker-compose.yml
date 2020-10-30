@@ -1,0 +1,14 @@
+# docker-compose.yml
+version: "2"
+services:
+  covnertpdf:
+    container_name: covnertpdf
+#    image: api_cayman:1.0
+    build:
+      context: .
+      dockerfile: Dockerfile
+    command: python3 app.py
+#    volumes:
+#      - /usr/local/volumes/fileserver/generarpdf/:/app/fileserver/
+    ports:
+      - "5454:5454"

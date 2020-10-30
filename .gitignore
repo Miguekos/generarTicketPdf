@@ -1,0 +1,13 @@
+
+/env
+/__pycache__
+/controller/__pycache__
+/.idea
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
