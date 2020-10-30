@@ -8,7 +8,7 @@ services:
       context: .
       dockerfile: Dockerfile
     command: python3 app.py
-#    volumes:
-#      - /usr/local/volumes/fileserver/generarpdf/:/app/fileserver/
+    volumes:
+      - /usr/local/volumes/fileserver/generarpdf/:/app/fileserver/
     ports:
       - "5454:5454"
