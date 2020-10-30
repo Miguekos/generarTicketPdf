@@ -31,10 +31,11 @@ def index():
     # path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
     # config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
     rendered = render_template('test.html', json=_json,
-                               pdf="http://127.0.0.1:5454/fileserver/uploads/{}.png".format(_json['registro']['registro']),
-                               qr="http://127.0.0.1:5454/fileserver/uploads/{}.png".format(
+                               pdf="http://127.0.0.1:5454/fileserver/tickets/{}.png".format(_json['registro']['registro']),
+                               qr="http://127.0.0.1:5454/fileserver/tickets/{}.png".format(
                                    _json['registro']['registro']))
     # css = ['estado.css']
+    print("http://127.0.0.1:5454/fileserver/tickets/{}.png".format(_json['registro']['registro']))
     pdf = pdfkit.from_string(rendered, pdffile)
     # pdf = pdfkit.from_string(rendered, False, css=css, configuration=config)
     # pdf = pdfkit.from_string(rendered, pdffile, configuration=config)
