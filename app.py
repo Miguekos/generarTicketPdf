@@ -10,7 +10,7 @@ app = Flask(__name__)
 app.config['PDF_FOLDER'] = 'fileserver/'
 app.config['TEMPLATE_FOLDER'] = 'templates/'
 
-@app.route('/fileserver/uploads/<filename>')
+@app.route('/fileserver/tickets/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['PDF_FOLDER'],
                                filename)
@@ -39,8 +39,7 @@ def index():
     # pdf = pdfkit.from_string(rendered, False, css=css, configuration=config)
     # pdf = pdfkit.from_string(rendered, pdffile, configuration=config)
 
-    return '''Click here to open the
-        <a href="http://localhost:5000/static/pdf/demo4.pdf">pdf</a>.'''
+    return "http://95.111.235.214:5454/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
 
     # response = make_response(pdf)
     # response.headers['Content-Type'] = 'aplication/pdf'
