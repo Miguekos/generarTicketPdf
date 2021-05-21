@@ -161,6 +161,8 @@ def actadeservicios(orden, tipo):
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
+        path_wkthmltopdfEquas = "options=pdf_options"
+        configEquas = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdfEquas)
         optionsPdfs = {
             'page-size': 'A4',
             'dpi': 300,
@@ -204,14 +206,16 @@ def reporte_equas(lote, tipo):
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False,
-                                         options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
+                                         options=optionsPdfs,
+                                         configuration=configEquas) if os.name != "nt" else pdfkit.from_string(
                     rendered, False, options=optionsPdfs, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
                 response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(lote)
                 return response
             if tipo == "2":
-                pdfkit.from_string(rendered, pdffile, options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
+                pdfkit.from_string(rendered, pdffile, options=optionsPdfs,
+                                   configuration=configEquas) if os.name != "nt" else pdfkit.from_string(
                     rendered, pdffile, options=optionsPdfs, configuration=config)
                 return {
                     "codRes": "00",
