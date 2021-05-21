@@ -1,12 +1,15 @@
 FROM python:3.6
 
-COPY . /app
+COPY ["requeriments.txt" ,  "/app/"]
 
 WORKDIR /app
 
 RUN apt-get update
 RUN apt-get install wkhtmltopdf -y
-RUN pip install -r requeriment.txt
+RUN pip install -r requeriments.txt
+
+COPY ["." ,  "/app/"]
+#COPY . /app
 
 EXPOSE 5238
 
