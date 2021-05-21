@@ -2,8 +2,8 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Reporte Equas</title>
 
     <style>
@@ -26,54 +26,61 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+
     </style>
 </head>
 
 <body>
-    <div class="logo">
-        <img src="http://127.0.0.1:5238/gnrpdf/static/logo_equas_solid.png" alt="logo" width="20%">
+<!--    <div class="logo">-->
+<!--        <img src="http://127.0.0.1:5238/gnrpdf/static/logo_equas_solid.png" alt="logo" width="20%">-->
+<!--    </div>-->
+<div style="padding-bottom: 8px; padding-top: 2px;">
+    <div style="text-align: left;">
+
     </div>
-    <div style="text-align: right; padding-bottom: 8px; padding-top: 2px;">
-        Fecha: {{ fecha }}
+    <div style="">
+        EQUAS
+        <span style="float: right;"> Fecha: {{ fecha }} </span>
     </div>
-    <div style="border: 1px solid black;">
-    </div>
-    <div>
-        <div style="padding-bottom: 6px; padding-top: 6px;"> Lote: {{json['lote'] }} </div>
-        <div style="padding-bottom: 6px;"> Proyecto: {{json['proyecto'] }} </div>
-        <div style="padding-bottom: 6px;"> Departamento: {{json['region'] }} </div>
-        <div style="padding-bottom: 6px;"> Provincia: {{json['ciudad'] }} </div>
-        <div style="padding-bottom: 6px;"> Distrito: {{json['distrito'] }} </div>
-        <div style="padding-bottom: 6px;"> Matriz: {{json['matriz'] }} </div>
-        <div style="padding-bottom: 6px;"> Fecha Muestreo: {{json['fechaMuestreo'] }} </div>
-        <div style="padding-bottom: 6px;"> Fecha Final: {{json['fechaFinal'] }} </div>
-        <div style="padding-bottom: 6px;"> Fecha Recepcion: {{json['fechaRecepcion'] }} </div>
-        <div style="padding-bottom: 10px;"> Estado: {{json['estado'] }} </div>
-    </div>
-    <div>
-        <table>
-            <tr>
-                <th>Cod lote</th>
-                <th>Cod muestra</th>
-                <th>Punto muestreo</th>
-                <th>descripcion punto muestreo</th>
-                <th>Resultado</th>
-                <th>Unidades</th>
-                <th>Parametros</th>
-            </tr>
-            {% for result in json['result'] %}
-            <tr>
-                <td>{{result['lote']}}</td>
-                <td>{{result['cod_muestra']}}</td>
-                <td>{{result['punto_muestreo']}}</td>
-                <td>{{result['descripcion_punto_muestreo']}}</td>
-                <td>{{result['resultado']}}</td>
-                <td>{{result['unidades']}}</td>
-                <td>{{result['parametro']}}</td>
-            </tr>
-            {% endfor %}
-        </table>
-    </div>
+</div>
+<div style="border: 1px solid black;">
+</div>
+<div>
+    <div style="padding-bottom: 6px; padding-top: 6px;"> Lote: {{json['lote'] }}</div>
+    <div style="padding-bottom: 6px;"> Proyecto: {{json['proyecto'] }}</div>
+    <div style="padding-bottom: 6px;"> Departamento: {{json['region'] }}</div>
+    <div style="padding-bottom: 6px;"> Provincia: {{json['ciudad'] }}</div>
+    <div style="padding-bottom: 6px;"> Distrito: {{json['distrito'] }}</div>
+    <div style="padding-bottom: 6px;"> Matriz: {{json['matriz'] }}</div>
+    <div style="padding-bottom: 6px;"> Fecha Muestreo: {{json['fechaMuestreo'] }}</div>
+    <div style="padding-bottom: 6px;"> Fecha Final: {{json['fechaFinal'] }}</div>
+    <div style="padding-bottom: 6px;"> Fecha Recepcion: {{json['fechaRecepcion'] }}</div>
+    <div style="padding-bottom: 10px;"> Estado: {{json['estado'] }}</div>
+</div>
+<div>
+    <table>
+        <tr>
+            <th>Cod lote</th>
+            <th>Cod muestra</th>
+            <th>Punto muestreo</th>
+            <th>descripcion punto muestreo</th>
+            <th>Resultado</th>
+            <th>Unidades</th>
+            <th>Parametros</th>
+        </tr>
+        {% for result in json['result'] %}
+        <tr>
+            <td>{{result['lote']}}</td>
+            <td>{{result['cod_muestra']}}</td>
+            <td>{{result['punto_muestreo']}}</td>
+            <td>{{result['descripcion_punto_muestreo']}}</td>
+            <td>{{result['resultado']}}</td>
+            <td>{{result['unidades']}}</td>
+            <td>{{result['parametro']}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 </body>
 
 </html>
