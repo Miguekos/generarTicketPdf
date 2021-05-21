@@ -39,6 +39,7 @@ options = {
     'margin-left': '0.0in',
     'margin-bottom': '0.3in',
     'encoding': "UTF-8",
+    "header-center": "[page] de [topage]",
     'footer-right': '[page] de [topage]',
     'custom-header': [
         ('Accept-Encoding', 'gzip')
@@ -56,6 +57,7 @@ options = {
 def uploaded_file(filename):
     return send_from_directory(app.config['PDF_FOLDER'],
                                filename)
+
 
 @app.route('/gnrpdf/static/<filename>')
 def uploaded_file_static(filename):
@@ -121,14 +123,18 @@ def actadeservicios(orden, tipo):
                 js_servic = response['operac'][0]['f_js_acta_operac']['js_servic']
                 print("js_servic", js_servic)
                 js_articu = response['operac'][0]['f_js_acta_operac']['js_articu']
-                rendered = render_template('actadeservicios.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [], js_articu=js_articu if js_articu else [], fecha=fechaactual)
+                rendered = render_template('actadeservicios.html', orden=orden, json=response['operac'],
+                                           js_servic=js_servic if js_servic else [],
+                                           js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
-                    pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                    pdf = pdfkit.from_string(rendered, False,
+                                             options=options) if os.name != "nt" else pdfkit.from_string(
                         rendered, False, options=options, configuration=config)
                     response = make_response(pdf)
                     response.headers['Content-Type'] = 'aplication/pdf'
-                    response.headers['Content-Disposition'] = 'attachment; filename=actadeservicios_{}.pdf'.format(orden)
+                    response.headers['Content-Disposition'] = 'attachment; filename=actadeservicios_{}.pdf'.format(
+                        orden)
                     return response
                 if tipo == "2":
                     pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
@@ -165,6 +171,7 @@ def reporte_equas(lote, tipo):
             'margin-left': '0.0in',
             'margin-bottom': '0.3in',
             'encoding': "UTF-8",
+            "header-center": "[page] de [topage]",
             'footer-right': '[page] de [topage]',
             'custom-header': [
                 ('Accept-Encoding', 'gzip')
@@ -192,10 +199,12 @@ def reporte_equas(lote, tipo):
             fechaactual = current_date_format(datetime.now(lima))
             print(fechaactual)
             rendered = render_template('reporte_equas.html', json=response, fecha=fechaactual,
-                                       logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
+                                       logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format(
+                                           "logo_equas_solid"), )
 
             if tipo == "1":
-                pdf = pdfkit.from_string(rendered, False, options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
+                pdf = pdfkit.from_string(rendered, False,
+                                         options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
                     rendered, False, options=optionsPdfs, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
