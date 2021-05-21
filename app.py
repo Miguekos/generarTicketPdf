@@ -195,14 +195,14 @@ def reporte_equas(lote, tipo):
                                        logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
 
             if tipo == "1":
-                pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                pdf = pdfkit.from_string(rendered, False, options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
                     rendered, False, options=optionsPdfs, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
                 response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(lote)
                 return response
             if tipo == "2":
-                pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                pdfkit.from_string(rendered, pdffile, options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
                     rendered, pdffile, options=optionsPdfs, configuration=config)
                 return {
                     "codRes": "00",
