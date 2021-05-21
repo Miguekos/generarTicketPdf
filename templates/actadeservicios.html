@@ -103,13 +103,13 @@
 <div class="logo">
     <img src="http://127.0.0.1:5238/gnrpdf/static/logoreinveintg.png" alt="logo" width="40%">
 </div>
-<div>
-    {{ fecha }}
-</div>
+<!--<div>-->
+<!--    {{ fecha }}-->
+<!--</div>-->
 <div class="titulo">
-    <b>ACTA DE SERVICIO Nº 107</b>
+    <b>ACTA DE SERVICIO Nº {{ orden }}</b>
 </div>
-
+{{ json[0][''] }}
 <div class="cuadros">
     <div>
         <b>CLIENTE:</b>
@@ -118,27 +118,27 @@
         <table style="width:100%">
             <tr>
                 <td>DNI/RUC:</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['co_docide'] }}</td>
             </tr>
             <tr>
                 <td>Cliente</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_client'] }}</td>
             </tr>
             <tr>
                 <td>Placa</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['co_plaveh'] }}</td>
             </tr>
             <tr>
                 <td>Marca</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_marveh'] }}</td>
             </tr>
             <tr>
                 <td>Modelo</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_modveh'] }}</td>
             </tr>
             <tr>
                 <td>Color</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_colveh'] }}</td>
             </tr>
         </table>
     </div>
@@ -151,11 +151,11 @@
         <table style="width:100%">
             <tr>
                 <td>Operacion:</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['id_operac'] }}</td>
             </tr>
             <tr>
                 <td>Fecha:</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['fe_regist'] }}</td>
             </tr>
             <tr>
                 <td>Neto:</td>
@@ -187,12 +187,14 @@
                 <th>Precio</th>
                 <th>Total</th>
             </tr>
+            {% for result in js_servic %}
             <tr>
-                <td>Servicio Anual IGV</td>
-                <td>1</td>
-                <td>10</td>
-                <td>10</td>
+                <td>{{ result['de_servic'] }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
+             {% endfor %}
         </table>
     </div>
 </div>
@@ -208,12 +210,14 @@
                 <th>Precio</th>
                 <th>Total</th>
             </tr>
+           {% for result in js_articu %}
             <tr>
-                <td>Servicio Anual IGV</td>
-                <td>1</td>
-                <td>10</td>
-                <td>10</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
+           {% endfor %}
         </table>
     </div>
 </div>
@@ -245,11 +249,11 @@
 <!--    </div>-->
 <!--</div>-->
 <div class="texto_final" style="padding-bottom: 10%;">
-    En señal de conformidad del servicio, el cliente firma el presente documento el 15 de mayo de 2021
+    En señal de conformidad del servicio, el cliente firma el presente documento el {{ fecha }}
 </div>
 
 
-<div class="row" style="padding-bottom: 20%;">
+<div class="row" style="padding-bottom: 30%;">
     <div class="column" style="text-align: center;">
         <div>Firma del Cliente</div>
     </div>
