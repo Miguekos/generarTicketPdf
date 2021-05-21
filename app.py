@@ -51,7 +51,7 @@ options = {
 }
 
 
-@app.route('/fileserver/<filename>')
+@app.route('/gnrpdf/fileserver/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['PDF_FOLDER'],
                                filename)
@@ -73,9 +73,9 @@ def index():
     # path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
     # config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
     rendered = render_template('test.html', json=_json,
-                               pdf="http://127.0.0.1:5238/fileserver/tickets/{}.png".format(
+                               pdf="http://127.0.0.1:5238/gnrpdf/fileserver/tickets/{}.png".format(
                                    _json['registro']['registro']),
-                               qr="http://127.0.0.1:5238/fileserver/tickets/{}.png".format(
+                               qr="http://127.0.0.1:5238/gnrpdf/fileserver/tickets/{}.png".format(
                                    _json['registro']['registro']))
     # css = ['estado.css']
     print("http://127.0.0.1:5238/fileserver/tickets/{}.png".format(_json['registro']['registro']))
@@ -92,7 +92,7 @@ def index():
     # return response
 
 
-@app.route('/actadeservicios', methods=['GET'])
+@app.route('/gnrpdf/actadeservicios', methods=['GET'])
 def actadeservicios():
     lima = pytz.timezone('America/Lima')
     li_time = datetime.now(lima)
@@ -127,7 +127,7 @@ def actadeservicios():
     # return response
 
 
-@app.route('/reporte_equas/<lote>/<tipo>', methods=['GET'])
+@app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
         print(lote)
@@ -146,7 +146,7 @@ def reporte_equas(lote, tipo):
             fechaactual = current_date_format(datetime.now(lima))
             print(fechaactual)
             rendered = render_template('reporte_equas.html', json=response, fecha=fechaactual,
-                                       logo="http://127.0.0.1:5238/fileserver/{}.png".format("logo_equas_solid"), )
+                                       logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
@@ -160,7 +160,7 @@ def reporte_equas(lote, tipo):
                     rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
-                    "message": "{}/fileserver/{}.pdf".format("http://127.0.0.1:5238", lote)
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", lote)
                 }
             # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
