@@ -98,39 +98,56 @@ def index():
     # return response
 
 
-@app.route('/gnrpdf/actadeservicios', methods=['GET'])
-def actadeservicios():
-    lima = pytz.timezone('America/Lima')
-    li_time = datetime.now(lima)
-    # _json = request.json
-    _json = "request.json"
-    # _json['registro']['registro'] = int(_json['registro']['registro'])
-    # _json['registro']['created_at'] = "{}".format(_json['registro']['created_at'])
-    # id = _json['id']
-    # imagen = qrcode.make("{}".format(id))
-    # archivo_imagen = open(app.config['PDF_FOLDER'] + '{}.png'.format(_json['registro']['registro']), 'wb')
-    # imagen.save(archivo_imagen)
-    # archivo_imagen.close()
-    # pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(_json['registro']['registro'])
-    pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format("prueba")
-    path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
-    config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-    rendered = render_template('actadeservicios.html', json=_json,
-                               logo="http://127.0.0.1:5238/fileserver/{}.png".format("logoreinveintg"), )
-    # css = ['estado.css']
-    # print("http://127.0.0.1:5238/fileserver/tickets/{}.png".format(_json['registro']['registro']))
-    # pdf = pdfkit.from_string(rendered, pdffile)
-    # pdf = pdfkit.from_string(rendered, False, css=css, configuration=config)
-    pdf = pdfkit.from_string(rendered, pdffile, configuration=config)
+@app.route('/gnrpdf/actadeservicios/<lote>/<tipo>', methods=['GET'])
+def actadeservicios(lote, tipo):
+    try:
+        # print(lote)
+        # url = 'https://api.apps.com.pe/equas/get_report/muestreos'
+        # headers = {'content-type': 'application/json'}
+        # body = {
+        #     "id": lote
+        # }
+        # data = json.dumps(body)
+        # x = requests.post(url, data=data, headers=headers)
+        # response = json.loads(x.content)
+        # print("cuenta", response)
+        # if response['codRes'] == "00":
+        d = 1
+        if d == 1:
+            pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(lote)
+            lima = pytz.timezone('America/Lima')
+            fechaactual = current_date_format(datetime.now(lima))
+            print(fechaactual)
+            rendered = render_template('actadeservicios.html', json="response", fecha=fechaactual)
 
-    # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-    return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+            if tipo == "1":
+                pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, False, options=options, configuration=config)
+                response = make_response(pdf)
+                response.headers['Content-Type'] = 'aplication/pdf'
+                response.headers['Content-Disposition'] = 'attachment; filename=actadeservicios_{}.pdf'.format(lote)
+                return response
+            if tipo == "2":
+                pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, pdffile, options=options, configuration=config)
+                return {
+                    "codRes": "00",
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", lote)
+                }
+            # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-    # response = make_response(pdf)
-    # response.headers['Content-Type'] = 'aplication/pdf'
-    # response.headers['Content-Disposition'] = 'attachment; filename=outout.pdf'
-    # print(response)
-    # return response
+            # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+            # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+
+
+        else:
+            return "Error Controlado"
+    except ValueError:
+        print(ValueError)
+        return {
+            "codRes": "99",
+            "message": "Error Controlado"
+        }
 
 
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
