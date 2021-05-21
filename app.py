@@ -11,6 +11,7 @@ import qrcode  # Importamos el modulo necesario para trabajar con codigos QR
 
 app = Flask(__name__)
 app.config['PDF_FOLDER'] = 'fileserver/'
+app.config['STATIC'] = 'static/'
 app.config['TEMPLATE_FOLDER'] = 'templates/'
 
 
@@ -54,6 +55,11 @@ options = {
 @app.route('/gnrpdf/fileserver/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['PDF_FOLDER'],
+                               filename)
+
+@app.route('/gnrpdf/static/<filename>')
+def uploaded_file_static(filename):
+    return send_from_directory(app.config['STATIC'],
                                filename)
 
 
