@@ -8,6 +8,6 @@ RUN apt-get update
 RUN apt-get install wkhtmltopdf -y
 RUN pip install -r requeriment.txt
 
-EXPOSE 5454
+EXPOSE 5238
 
 CMD [ "python" , "app.py" ]

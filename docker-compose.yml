@@ -9,6 +9,6 @@ services:
       dockerfile: Dockerfile
     command: python3 app.py
     volumes:
-      - /usr/local/volumes/fileserver/generarpdf/:/app/fileserver/
+      - /usr/local/volumes/fileserver/generarpdf_generico/:/app/fileserver/
     ports:
-      - "5454:5454"
+      - "5238:5238"
