@@ -39,7 +39,7 @@ options = {
     'margin-left': '0.0in',
     'margin-bottom': '0.3in',
     'encoding': "UTF-8",
-    # 'footer-right': '[page] de [topage]',
+    'footer-right': '[page] de [topage]',
     'custom-header': [
         ('Accept-Encoding', 'gzip')
     ],
@@ -165,7 +165,7 @@ def reporte_equas(lote, tipo):
             'margin-left': '0.0in',
             'margin-bottom': '0.3in',
             'encoding': "UTF-8",
-            'footer-right': '[page] / [topage]',
+            'footer-right': '[page] de [topage]',
             'custom-header': [
                 ('Accept-Encoding', 'gzip')
             ],
