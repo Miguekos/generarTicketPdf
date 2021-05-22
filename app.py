@@ -26,31 +26,29 @@ def current_date_format(date):
     return messsage
 
 
-global options, config
-path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
-config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
-options = {
-    'page-size': 'A4',
-    'dpi': 300,
-    # 'disable-smart-shrinking': '',
-    'margin-top': '0.2in',
-    'margin-right': '0.0in',
-    # 'margin-bottom': '0.3in',
-    'margin-left': '0.0in',
-    'margin-bottom': '0.3in',
-    'encoding': "UTF-8",
-    "header-center": "[page] de [topage]",
-    'footer-right': '[page] de [topage]',
-    'custom-header': [
-        ('Accept-Encoding', 'gzip')
-    ],
-    # 'quiet': '',
-    'cookie': [
-        ('cookie-name1', 'cookie-value1'),
-        ('cookie-name2', 'cookie-value2'),
-    ],
-    'no-outline': None
-}
+# global options, config
+# options = {
+#     'page-size': 'A4',
+#     'dpi': 300,
+#     # 'disable-smart-shrinking': '',
+#     'margin-top': '0.2in',
+#     'margin-right': '0.0in',
+#     # 'margin-bottom': '0.3in',
+#     'margin-left': '0.0in',
+#     'margin-bottom': '0.3in',
+#     'encoding': "UTF-8",
+#     "header-center": "[page] de [topage]",
+#     'footer-right': '[page] de [topage]',
+#     'custom-header': [
+#         ('Accept-Encoding', 'gzip')
+#     ],
+#     # 'quiet': '',
+#     'cookie': [
+#         ('cookie-name1', 'cookie-value1'),
+#         ('cookie-name2', 'cookie-value2'),
+#     ],
+#     'no-outline': None
+# }
 
 
 @app.route('/gnrpdf/fileserver/<filename>')
@@ -105,6 +103,32 @@ def index():
 @app.route('/gnrpdf/actadeservicios/<orden>/<tipo>', methods=['GET'])
 def actadeservicios(orden, tipo):
     try:
+        path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+        options = {
+            'page-size': 'A4',
+            'header-spacing': '4',
+            'footer-spacing': '2',
+            'dpi': 300,
+            # 'disable-smart-shrinking': '',
+            # 'margin-top': '0.2in',
+            # 'margin-right': '0.0in',
+            # 'margin-bottom': '0.3in',
+            # 'margin-left': '0.0in',
+            # 'margin-bottom': '0.3in',
+            'encoding': "UTF-8",
+            "header-center": "[page] of [topage]",
+            'footer-right': '[page] of [topage]',
+            'custom-header': [
+                ('Accept-Encoding', 'gzip')
+            ],
+            # 'quiet': '',
+            'cookie': [
+                ('cookie-name1', 'cookie-value1'),
+                ('cookie-name2', 'cookie-value2'),
+            ],
+            'no-outline': None
+        }
         print(orden)
         url = 'https://api.reinventing.com.pe/v2.0/pdf/js_acta_operac/{}'.format(orden)
         headers = {'content-type': 'application/json'}
@@ -130,17 +154,14 @@ def actadeservicios(orden, tipo):
                                            js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
-                    pdf = pdfkit.from_string(rendered, False,
-                                             options=options) if os.name != "nt" else pdfkit.from_string(
-                        rendered, False, options=options, configuration=config)
+                    pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(rendered, False, options=options, configuration=config)
                     response = make_response(pdf)
                     response.headers['Content-Type'] = 'aplication/pdf'
                     response.headers['Content-Disposition'] = 'attachment; filename=actadeservicios_{}.pdf'.format(
                         orden)
                     return response
                 if tipo == "2":
-                    pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
-                        rendered, pdffile, options=options, configuration=config)
+                    pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
                         "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", orden)
@@ -163,7 +184,9 @@ def actadeservicios(orden, tipo):
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
-        optionsPdfs = {
+        path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
+        config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+        options = {
             'page-size': 'A4',
             'header-spacing': '4',
             'footer-spacing': '2',
