@@ -117,8 +117,8 @@ def actadeservicios(orden, tipo):
             # 'margin-left': '0.0in',
             # 'margin-bottom': '0.3in',
             'encoding': "UTF-8",
-            "header-center": "[page] of [topage]",
-            'footer-right': '[page] of [topage]',
+            "--header-center": "[page] of [topage]",
+            '--footer-right': '[page] of [topage]',
             'custom-header': [
                 ('Accept-Encoding', 'gzip')
             ],
@@ -189,7 +189,6 @@ def reporte_equas(lote, tipo):
         options = {
             'page-size': 'A4',
             'header-spacing': '4',
-            'footer-spacing': '2',
             'dpi': 300,
             # 'disable-smart-shrinking': '',
             # 'margin-top': '0.2in',
@@ -198,8 +197,8 @@ def reporte_equas(lote, tipo):
             # 'margin-left': '0.0in',
             # 'margin-bottom': '0.3in',
             'encoding': "UTF-8",
-            "header-center": "[page] of [topage]",
-            'footer-right': '[page] of [topage]',
+            "--header-center": "[page] of [topage]",
+            '--footer-right': '[page] of [topage]',
             'custom-header': [
                 ('Accept-Encoding', 'gzip')
             ],
