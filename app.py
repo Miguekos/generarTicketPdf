@@ -161,20 +161,20 @@ def actadeservicios(orden, tipo):
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
-        path_wkthmltopdfEquas = "options=pdf_options"
-        configEquas = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdfEquas)
         optionsPdfs = {
             'page-size': 'A4',
+            'header-spacing': '4',
+            'footer-spacing': '2',
             'dpi': 300,
             # 'disable-smart-shrinking': '',
-            'margin-top': '0.2in',
-            'margin-right': '0.0in',
+            # 'margin-top': '0.2in',
+            # 'margin-right': '0.0in',
             # 'margin-bottom': '0.3in',
-            'margin-left': '0.0in',
-            'margin-bottom': '0.3in',
+            # 'margin-left': '0.0in',
+            # 'margin-bottom': '0.3in',
             'encoding': "UTF-8",
-            "header-center": "[page] de [topage]",
-            'footer-right': '[page] de [topage]',
+            "header-center": "[page] of [topage]",
+            'footer-right': '[page] of [topage]',
             'custom-header': [
                 ('Accept-Encoding', 'gzip')
             ],
@@ -206,16 +206,14 @@ def reporte_equas(lote, tipo):
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False,
-                                         options=optionsPdfs,
-                                         configuration=configEquas) if os.name != "nt" else pdfkit.from_string(
+                                         options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
                     rendered, False, options=optionsPdfs, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
                 response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(lote)
                 return response
             if tipo == "2":
-                pdfkit.from_string(rendered, pdffile, options=optionsPdfs,
-                                   configuration=configEquas) if os.name != "nt" else pdfkit.from_string(
+                pdfkit.from_string(rendered, pdffile, options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
                     rendered, pdffile, options=optionsPdfs, configuration=config)
                 return {
                     "codRes": "00",
