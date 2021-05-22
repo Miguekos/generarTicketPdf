@@ -64,6 +64,21 @@ def uploaded_file_static(filename):
 
 
 
+@app.route('/gnrpdf/test', methods=['GET'])
+def test():
+    path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
+    config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
+    options = {
+          # 'margin-bottom': '0.75in',
+          'footer-right': '[page] of [topage]',
+         }
+    pdf = pdfkit.from_string('Hello World', 'out.pdf', options=options, configuration=config)
+    response = make_response(pdf)
+    response.headers['Content-Type'] = 'aplication/pdf'
+    response.headers['Content-Disposition'] = 'attachment; filename=actadeservicios_{}.pdf'.format(
+        "orden")
+    return response
+
 
 @app.route('/imprimirticketpdf', methods=['POST'])
 def index():
@@ -230,15 +245,15 @@ def reporte_equas(lote, tipo):
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False,
-                                         options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
-                    rendered, False, options=optionsPdfs, configuration=config)
+                                         options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, False, options=options, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
                 response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(lote)
                 return response
             if tipo == "2":
-                pdfkit.from_string(rendered, pdffile, options=optionsPdfs) if os.name != "nt" else pdfkit.from_string(
-                    rendered, pdffile, options=optionsPdfs, configuration=config)
+                pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
                     "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", lote)
