@@ -39,7 +39,7 @@ options = {
     'margin-left': '0.0in',
     'margin-bottom': '0.3in',
     'encoding': "UTF-8",
-    # 'footer-right': '[page] de [topage]',
+    'footer-right': '[page] / [topage]',
     'custom-header': [
         ('Accept-Encoding', 'gzip')
     ],
@@ -155,27 +155,6 @@ def actadeservicios(orden, tipo):
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
-        optionsPdfs = {
-            'page-size': 'A4',
-            'dpi': 300,
-            # 'disable-smart-shrinking': '',
-            'margin-top': '0.2in',
-            'margin-right': '0.0in',
-            # 'margin-bottom': '0.3in',
-            'margin-left': '0.0in',
-            'margin-bottom': '0.3in',
-            'encoding': "UTF-8",
-            'footer-right': '[page] / [topage]',
-            'custom-header': [
-                ('Accept-Encoding', 'gzip')
-            ],
-            # 'quiet': '',
-            'cookie': [
-                ('cookie-name1', 'cookie-value1'),
-                ('cookie-name2', 'cookie-value2'),
-            ],
-            'no-outline': None
-        }
         print(lote)
         url = 'https://api.apps.com.pe/equas/get_report/muestreos'
         headers = {'content-type': 'application/json'}
@@ -196,14 +175,14 @@ def reporte_equas(lote, tipo):
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
-                    rendered, False, options=optionsPdfs, configuration=config)
+                    rendered, False, options=options, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
                 response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(lote)
                 return response
             if tipo == "2":
                 pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
-                    rendered, pdffile, options=optionsPdfs, configuration=config)
+                    rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
                     "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", lote)

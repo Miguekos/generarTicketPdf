@@ -3,7 +3,6 @@
 
 <head>
     <meta charset="UTF-8"/>
-<!--    <meta name="pdfkit-orientation" content="Landscape"/>-->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Reporte Equas</title>
 
@@ -31,28 +30,8 @@
 
 
 
+
     </style>
-    <script>
-    function subst() {
-      var vars = {};
-      var query_strings_from_url = document.location.search.substring(1).split('&');
-      for (var query_string in query_strings_from_url) {
-        if (query_strings_from_url.hasOwnProperty(query_string)) {
-          var temp_var = query_strings_from_url[query_string].split('=', 2);
-          vars[temp_var[0]] = decodeURI(temp_var[1]);
-        }
-      }
-      var css_selector_classes = ['page', 'frompage', 'topage', 'webpage', 'section', 'subsection', 'date', 'isodate', 'time', 'title', 'doctitle', 'sitepage', 'sitepages'];
-      for (var css_class in css_selector_classes) {
-        if (css_selector_classes.hasOwnProperty(css_class)) {
-            var element = document.getElementsByClassName(css_selector_classes[css_class]);
-            for (var j = 0; j < element.length; ++j) {
-                element[j].textContent = vars[css_selector_classes[css_class]];
-            }
-        }
-      }
-    }
-  </script>
 </head>
 
 <body style="border:0; margin: 0;" onload="subst()">
@@ -83,7 +62,7 @@
     <div style="padding-bottom: 10px;"> Estado: {{json['estado'] }}</div>
 </div>
 <div>
-    <table style="page-break-inside: avoid !important;">
+    <table>
         <tr>
             <th>Cod lote</th>
             <th>Cod muestra</th>
@@ -94,7 +73,7 @@
             <th>Parametros</th>
         </tr>
         {% for result in json['result'] %}
-        <tr>
+        <tr style="page-break-inside: avoid !important;">
             <td>{{result['lote']}}</td>
             <td>{{result['cod_muestra']}}</td>
             <td>{{result['punto_muestreo']}}</td>
@@ -106,7 +85,6 @@
         {% endfor %}
     </table>
 </div>
-Page <span class="page"></span> of <span class="topage"></span>
 </body>
 
 </html>
