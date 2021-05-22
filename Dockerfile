@@ -8,7 +8,7 @@ ADD https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmlto
 #RUN apt-get update
 #RUN apt-get install wkhtmltopdf -y
 RUN ls -lth
-RUN dpkg -i ./app/wkhtmltox_0.12.6-1.buster_amd64.deb -y
+RUN dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb -y
 RUN pip install -r requeriments.txt
 
 COPY ["." ,  "/app/"]
