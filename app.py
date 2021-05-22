@@ -49,7 +49,6 @@ options = {
     'custom-header': [
         ('Accept-Encoding', 'gzip')
     ],
-    'log-level' : 'info ',
     # 'quiet': '',
     # 'cookie': [
     #     ('cookie-name1', 'cookie-value1'),
