@@ -65,6 +65,8 @@ def uploaded_file_static(filename):
                                filename)
 
 
+
+
 @app.route('/imprimirticketpdf', methods=['POST'])
 def index():
     lima = pytz.timezone('America/Lima')

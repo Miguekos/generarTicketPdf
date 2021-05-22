@@ -15,6 +15,7 @@
         table {
             border-collapse: collapse;
             width: 100%;
+            page-break-inside: avoid !important;
         }
 
         td,
@@ -29,10 +30,32 @@
         }
 
 
+
     </style>
+    <script>
+    function subst() {
+      var vars = {};
+      var query_strings_from_url = document.location.search.substring(1).split('&');
+      for (var query_string in query_strings_from_url) {
+        if (query_strings_from_url.hasOwnProperty(query_string)) {
+          var temp_var = query_strings_from_url[query_string].split('=', 2);
+          vars[temp_var[0]] = decodeURI(temp_var[1]);
+        }
+      }
+      var css_selector_classes = ['page', 'frompage', 'topage', 'webpage', 'section', 'subsection', 'date', 'isodate', 'time', 'title', 'doctitle', 'sitepage', 'sitepages'];
+      for (var css_class in css_selector_classes) {
+        if (css_selector_classes.hasOwnProperty(css_class)) {
+            var element = document.getElementsByClassName(css_selector_classes[css_class]);
+            for (var j = 0; j < element.length; ++j) {
+                element[j].textContent = vars[css_selector_classes[css_class]];
+            }
+        }
+      }
+    }
+  </script>
 </head>
 
-<body>
+<body style="border:0; margin: 0;" onload="subst()">
 <!--    <div class="logo">-->
 <!--        <img src="http://127.0.0.1:5238/gnrpdf/static/logo_equas_solid.png" alt="logo" width="20%">-->
 <!--    </div>-->
@@ -60,7 +83,7 @@
     <div style="padding-bottom: 10px;"> Estado: {{json['estado'] }}</div>
 </div>
 <div>
-    <table>
+    <table style="page-break-inside: avoid !important;">
         <tr>
             <th>Cod lote</th>
             <th>Cod muestra</th>
@@ -83,6 +106,7 @@
         {% endfor %}
     </table>
 </div>
+Page <span class="page"></span> of <span class="topage"></span>
 </body>
 
 </html>
