@@ -35,21 +35,26 @@ options = {
     # 'disable-smart-shrinking': '',
     'header-spacing': '4',
     'footer-spacing': '2',
+    'footer-font-size' : '10',
+    'header-font-size' : '10',
     # 'margin-top': '0.2in',
     # 'margin-right': '0.0in',
     # 'margin-bottom': '0.3in',
     # 'margin-left': '0.0in',
     # 'margin-bottom': '0.3in',
+    'orientation' : 'Portrait',
+    'disable-forms' : '',
     'encoding': "UTF-8",
     'footer-right': '[page] / [topage]',
     'custom-header': [
         ('Accept-Encoding', 'gzip')
     ],
+    'log-level' : 'info ',
     # 'quiet': '',
-    'cookie': [
-        ('cookie-name1', 'cookie-value1'),
-        ('cookie-name2', 'cookie-value2'),
-    ],
+    # 'cookie': [
+    #     ('cookie-name1', 'cookie-value1'),
+    #     ('cookie-name2', 'cookie-value2'),
+    # ],
     'no-outline': None
 }
 
