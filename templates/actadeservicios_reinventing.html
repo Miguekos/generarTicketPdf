@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Acta de Servicios</title>
+    <style>
+        /* table,
+        th,
+        td {
+            border-bottom: 1px solid black;
+        } */
+
+        body {
+            width: 84%;
+            margin-left: 8%;
+            margin-right: 6%;
+        }
+
+        .titulo {
+            /* border: 1px solid black; */
+            text-align: center;
+            text-decoration: underline;
+            padding: 20px;
+        }
+
+        .tabla1 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla2 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla3 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla4 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla5 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .logo {
+            /* border: 1px solid black; */
+            padding: 20px;
+        }
+
+        .texto_final {
+            border: 1px solid white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            margin-left: 25px;
+            float: left;
+            width: 30%;
+            padding: 10px;
+            /* height: 300px; */
+            /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .cuadros {
+            padding-bottom: 20px;
+        }
+
+        .footer {
+           border-top: 1px solid black;
+           text-align: center;
+           position: fixed;
+           left: 0;
+           bottom: 0;
+           width: 100%;
+           /* background-color: red; */
+           color: blue;
+           text-align: center;
+        }
+
+
+
+    </style>
+</head>
+
+<body>
+<div class="logo">
+    <img src="http://127.0.0.1:5238/gnrpdf/static/logoreinveintg.png" alt="logo" width="40%">
+</div>
+<!--<div>-->
+<!--    {{ fecha }}-->
+<!--</div>-->
+<div class="titulo">
+    <b>ACTA DE SERVICIO Nº {{ orden }}</b>
+</div>
+{{ json[0][''] }}
+<div class="cuadros">
+    <div>
+        <b>DATOS DEL SERVICIO:</b>
+    </div>
+    <div class="tabla1">
+        <table style="width:100%">
+            <tr>
+                <td>Orden: {{ json[0]['f_js_acta_operac']['id_operac'] }}</td>
+                <td style="width: 50%;">Fecha de ingreso: {{ json[0]['f_js_acta_operac']['fe_regist'] }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td style="width: 50%;">Fecha de salida: {{ json[0]['f_js_acta_operac']['fe_salida'] }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="cuadros">
+    <div>
+        <b>DATOS DEL CLIENTE:</b>
+    </div>
+    <div class="tabla1">
+        <table style="width:100%">
+            <tr>
+                <td>Cliente: {{ json[0]['f_js_acta_operac']['no_client'] }}</td>
+                <td style="width: 50%;"></td>
+            </tr>
+            <tr>
+                <td>Tipo de Documento: {{ json[0]['f_js_acta_operac']['no_docide'] }}</td>
+                <td style="width: 50%;">N° de Documento: {{ json[0]['f_js_acta_operac']['co_docide'] }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="cuadros">
+    <div>
+        <b>REQUERIMIENTO DEL CLIENTE</b>
+    </div>
+    <div class="tabla1">
+        <table style="width:100%">
+            <tr>
+                <td>Tipo de Servicio solicitado:</td>
+            </tr>
+            {% for result in js_servic %}
+            <tr>
+                <td>{{ result['de_servic'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<div class="cuadros">
+    <div>
+        <b>TRABAJOS REALIZADOS POR TALLER</b>
+    </div>
+    <div class="tabla1">
+        <table style="width:100%">
+            {% for result in js_articu %}
+            <tr>
+                <td>{{ result['de_servic'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+<!--<div class="cuadros">-->
+<!--    <div>-->
+<!--        <b>TRABAJOS REALIZADOS POR TALLER:</b>-->
+<!--    </div>-->
+<!--    <div class="tabla1">-->
+<!--        <table style="width:100%">-->
+<!--            <tr>-->
+<!--                <td>PRUEBA QUINQUENAL TIPO I</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CERTIFICACION ANUAL GNV</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CAMBIO DE BASE DE RIEL DE INYECTORES</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CAMBIO DE BUJIAS DE ENCENDIDO (4)</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CAMBIO DE BASE DE RIEL DE INYECTORES</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>MANGUERA DE FILTRO DE GAS</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+<div class="texto_final" style="padding-bottom: 30%;">
+    En señal de conformidad del servicio, el cliente firma el presente documento el {{ fecha }}
+</div>
+
+
+<div class="row" style="padding-bottom: 30%;">
+    <div class="column" style="text-align: center;">
+        <div>Firma del Cliente</div>
+    </div>
+    <div class="column" style="text-align: center;">
+        <div>Firma de Asesor</div>
+        <div><b>REINVENTING</b></div>
+
+        <!-- <h5>Firma de Asesor</h5>
+        <h4>REINVENTING</h4> -->
+    </div>
+    <div class="column" style="text-align: center;">
+        <div>Firma de Asesor</div>
+        <div><b>ACCESO</b></div>
+    </div>
+</div>
+
+<div class="footer">
+    Jr. Gregorio Paredes N° 418, Cercado, Lima – Teléfono (01) 3037033 – 942 974 189
+</div>
+
+</body>
+
+</html>
