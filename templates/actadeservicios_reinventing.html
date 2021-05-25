@@ -160,8 +160,17 @@
     <div class="tabla1">
         <table style="width:100%">
             <tr>
-                <td>Tipo de Servicio solicitado:</td>
+                <td>Tipo de Servicio solicitado: {{ json[0]['f_js_acta_operac']['de_ingsal'] }}</td>
             </tr>
+        </table>
+    </div>
+</div>
+<div class="cuadros">
+    <div>
+        <b>TRABAJOS REALIZADOS POR TALLER</b>
+    </div>
+    <div class="tabla1">
+        <table style="width:100%">
             {% for result in js_servic %}
             <tr>
                 <td>{{ result['de_servic'] }}</td>
@@ -172,13 +181,13 @@
 </div>
 <div class="cuadros">
     <div>
-        <b>TRABAJOS REALIZADOS POR TALLER</b>
+        <b>MATERIALES UTILIZADOS</b>
     </div>
     <div class="tabla1">
         <table style="width:100%">
             {% for result in js_articu %}
             <tr>
-                <td>{{ result['de_servic'] }}</td>
+                <td>{{ result['de_articu'] }}</td>
             </tr>
             {% endfor %}
         </table>
