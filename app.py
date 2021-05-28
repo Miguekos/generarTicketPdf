@@ -125,6 +125,7 @@ def actadeservicios(orden, tipo):
                 js_servic = response['operac'][0]['f_js_acta_operac']['js_servic']
                 print("js_servic", js_servic)
                 js_articu = response['operac'][0]['f_js_acta_operac']['js_articu']
+                print("js_servic", js_servic)
                 rendered = render_template('actadeservicios_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [], js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
@@ -214,6 +215,33 @@ def formulario_reinventing(orden, tipo):
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
+        options = {
+            'page-size': 'A4',
+            'dpi': 300,
+            # 'disable-smart-shrinking': '',
+            'header-spacing': '4',
+            'footer-spacing': '2',
+            'footer-font-size': '10',
+            'header-font-size': '10',
+            # 'margin-top': '0.2in',
+            # 'margin-right': '0.0in',
+            # 'margin-bottom': '0.3in',
+            # 'margin-left': '0.0in',
+            # 'margin-bottom': '0.3in',
+            'orientation': 'Landscape',
+            'disable-forms': '',
+            'encoding': "UTF-8",
+            'footer-right': '[page] / [topage]',
+            'custom-header': [
+                ('Accept-Encoding', 'gzip')
+            ],
+            # 'quiet': '',
+            # 'cookie': [
+            #     ('cookie-name1', 'cookie-value1'),
+            #     ('cookie-name2', 'cookie-value2'),
+            # ],
+            'no-outline': None
+        }
         print(lote)
         url = 'https://api.apps.com.pe/equas/get_report/muestreos'
         headers = {'content-type': 'application/json'}
