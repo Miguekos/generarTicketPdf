@@ -116,7 +116,7 @@
 <!--    {{ fecha }}-->
 <!--</div>-->
 <div class="titulo">
-    <b>ACTA DE SERVICIO Nº {{ orden }}</b>
+    <b>ACTA DE SERVICIO Nro: {{ orden }}</b>
 </div>
 {{ json[0][''] }}
 <div class="cuadros">
@@ -149,6 +149,23 @@
             <tr>
                 <td>Tipo de Documento: {{ json[0]['f_js_acta_operac']['no_docide'] }}</td>
                 <td style="width: 50%;">N° de Documento: {{ json[0]['f_js_acta_operac']['co_docide'] }}</td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="cuadros">
+    <div>
+        <b>DATOS DE LA UNIDAD:</b>
+    </div>
+    <div class="tabla1">
+        <table style="width:100%">
+            <tr>
+                <td>Marca: {{ json[0]['f_js_acta_operac']['no_marveh'] }}</td>
+                <td style="width: 50%;">Color: {{ json[0]['f_js_acta_operac']['no_colveh'] }}</td>
+            </tr>
+            <tr>
+                <td>Placa: {{ json[0]['f_js_acta_operac']['co_plaveh'] }}</td>
+                <td style="width: 50%;">Modelo: {{ json[0]['f_js_acta_operac']['no_modveh'] }}</td>
             </tr>
         </table>
     </div>
