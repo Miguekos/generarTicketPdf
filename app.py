@@ -158,7 +158,7 @@ def actadeservicios(orden, tipo):
 
 
 
-@app.route('/gnrpdf/formulario/<orden>/<tipo>', methods=['GET'])
+@app.route('/gnrpdf/proformadeservicios/<orden>/<tipo>', methods=['GET'])
 def formulario_reinventing(orden, tipo):
     try:
         print(orden)
