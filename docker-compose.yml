@@ -7,7 +7,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    command: python3 app.py
+    command: python -u app.py
     volumes:
       - /usr/local/volumes/fileserver/generarpdf_generico/:/app/fileserver/
     ports:

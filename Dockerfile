@@ -1,4 +1,4 @@
-FROM python:3.6
+FROM python:3.6-slim
 
 COPY ["requeriments.txt" ,  "/app/"]
 
@@ -17,4 +17,4 @@ COPY ["." ,  "/app/"]
 
 EXPOSE 5238
 
-CMD [ "python" , "app.py" ]
+#CMD [ "python" , "app.py" ]
