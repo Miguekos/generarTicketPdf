@@ -182,18 +182,18 @@
     </div>
     <div class="tabla1">
         <table style="width:100%">
-            <tr style="text-align: left">
-                <th>Descripcion</th>
-                <th>Cantidad</th>
-                <th>Precio</th>
-                <th>Total</th>
+            <tr>
+                <th style="text-align: left">Descripcion</th>
+                <th style="text-align: right">Cantidad</th>
+                <th style="text-align: right">Precio</th>
+                <th style="text-align: right">Total</th>
             </tr>
             {% for result in js_servic %}
             <tr>
-                <td>{{ result['de_servic'] }}</td>
-                <td>{{ result['ca_uniser'] }}</td>
-                <td>{{ result['im_uniser'] }}</td>
-                <td>{{ result['im_uniser'] }}</td>
+                <td style="text-align: left">{{ result['de_servic'] }}</td>
+                <td style="text-align: right">{{ result['ca_uniser'] }}</td>
+                <td style="text-align: right">{{ result['im_uniser'] }}</td>
+                <td style="text-align: right">{{ result['im_totser'] }}</td>
             </tr>
             {% endfor %}
         </table>
@@ -213,10 +213,10 @@
             </tr>
             {% for result in js_articu %}
             <tr>
-                <td>{{ result['de_servic'] }}</td>
-                <td>{{ result['ca_uniser'] }}</td>
-                <td>{{ result['im_uniser'] }}</td>
-                <td>{{ result['im_uniser'] }}</td>
+                <td style="text-align: left">{{ result['de_servic'] }}</td>
+                <td style="text-align: right">{{ result['ca_uniser'] }}</td>
+                <td style="text-align: right">{{ result['im_uniser'] }}</td>
+                <td style="text-align: right">{{ result['im_totser'] }}</td>
             </tr>
             {% endfor %}
         </table>
