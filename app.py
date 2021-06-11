@@ -118,7 +118,7 @@ def actadeservicios(orden, tipo):
         if response['res'] == "ok":
             d = 1
             if d == 1:
-                pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(orden)
+                pdffile = app.config['PDF_FOLDER'] + 'actadeservicios_{}.pdf'.format(orden)
                 lima = pytz.timezone('America/Lima')
                 fechaactual = current_date_format(datetime.now(lima))
                 print(fechaactual)
@@ -140,7 +140,7 @@ def actadeservicios(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/actadeservicios_{}.pdf".format("http://127.0.0.1:5238", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
@@ -162,7 +162,7 @@ def actadeservicios(orden, tipo):
 def formulario_reinventing(orden, tipo):
     try:
         print(orden)
-        url = 'https://api.reinventing.com.pe/v2.0/pdf/js_acta_operac/{}'.format(orden)
+        url = 'https://api.reinventing.com.pe/v2.0/pdf/js_proforma_operac/{}'.format(orden)
         headers = {'content-type': 'application/json'}
         # body = {
         #     "id": orden
@@ -174,13 +174,13 @@ def formulario_reinventing(orden, tipo):
         if response['res'] == "ok":
             d = 1
             if d == 1:
-                pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(orden)
+                pdffile = app.config['PDF_FOLDER'] + 'proforma_{}.pdf'.format(orden)
                 lima = pytz.timezone('America/Lima')
                 fechaactual = current_date_format(datetime.now(lima))
                 print(fechaactual)
-                js_servic = response['operac'][0]['f_js_acta_operac']['js_servic']
+                js_servic = response['operac'][0]['f_js_proforma_operac']['js_servic']
                 print("js_servic", js_servic)
-                js_articu = response['operac'][0]['f_js_acta_operac']['js_articu']
+                js_articu = response['operac'][0]['f_js_proforma_operac']['js_articu']
                 rendered = render_template('formulario_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [], js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
@@ -188,14 +188,14 @@ def formulario_reinventing(orden, tipo):
                         rendered, False, options=options, configuration=config)
                     response = make_response(pdf)
                     response.headers['Content-Type'] = 'aplication/pdf'
-                    response.headers['Content-Disposition'] = 'attachment; filename=actadeservicios_{}.pdf'.format(orden)
+                    response.headers['Content-Disposition'] = 'attachment; filename=proforma_{}.pdf'.format(orden)
                     return response
                 if tipo == "2":
                     pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/proforma_{}.pdf".format("http://127.0.0.1:5238", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 

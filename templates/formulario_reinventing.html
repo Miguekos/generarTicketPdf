@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Acta de Servicios</title>
+    <title>Proforma</title>
     <style>
         /* table,
         th,
@@ -21,7 +21,8 @@
         .titulo {
             /* border: 1px solid black; */
             text-align: center;
-            text-decoration: underline;
+            font-size: 20px;
+            /* text-decoration: underline; */
             padding: 20px;
         }
 
@@ -103,13 +104,13 @@
 <div class="logo">
     <img src="http://127.0.0.1:5238/gnrpdf/static/logoreinveintg.png" alt="logo" width="40%">
 </div>
-<!--<div>-->
+<div>
 <!--    {{ fecha }}-->
-<!--</div>-->
-<div class="titulo">
-    <b>ACTA DE SERVICIO Nº {{ orden }}</b>
 </div>
-{{ json[0][''] }}
+<div class="titulo">
+    <b>{{ fecha }}</b>
+</div>
+
 <div class="cuadros">
     <div>
         <b>CLIENTE:</b>
@@ -118,27 +119,27 @@
         <table style="width:100%">
             <tr>
                 <td>DNI/RUC:</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['co_docide'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['co_docide'] }}</td>
             </tr>
             <tr>
                 <td>Cliente</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_client'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['no_client'] }}</td>
             </tr>
             <tr>
                 <td>Placa</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['co_plaveh'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['co_plaveh'] }}</td>
             </tr>
             <tr>
                 <td>Marca</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_marveh'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['no_marveh'] }}</td>
             </tr>
             <tr>
                 <td>Modelo</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_modveh'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['no_modveh'] }}</td>
             </tr>
             <tr>
                 <td>Color</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['no_colveh'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['no_colveh'] }}</td>
             </tr>
         </table>
     </div>
@@ -151,23 +152,23 @@
         <table style="width:100%">
             <tr>
                 <td>Operacion:</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['id_operac'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['id_operac'] }}</td>
             </tr>
             <tr>
                 <td>Fecha:</td>
-                <td style="width: 50%;">{{ json[0]['f_js_acta_operac']['fe_regist'] }}</td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['fe_regist'] }}</td>
             </tr>
             <tr>
                 <td>Neto:</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['im_prenet'] }}</td>
             </tr>
             <tr>
                 <td>IGV:</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['im_igvnet'] }}</td>
             </tr>
             <tr>
                 <td>Total:</td>
-                <td style="width: 50%;"></td>
+                <td style="width: 50%;">{{ json[0]['f_js_proforma_operac']['im_totnet'] }}</td>
             </tr>
         </table>
     </div>
@@ -190,11 +191,11 @@
             {% for result in js_servic %}
             <tr>
                 <td>{{ result['de_servic'] }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ result['ca_uniser'] }}</td>
+                <td>{{ result['im_uniser'] }}</td>
+                <td>{{ result['im_uniser'] }}</td>
             </tr>
-             {% endfor %}
+            {% endfor %}
         </table>
     </div>
 </div>
@@ -210,14 +211,14 @@
                 <th>Precio</th>
                 <th>Total</th>
             </tr>
-           {% for result in js_articu %}
+            {% for result in js_articu %}
             <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>{{ result['de_servic'] }}</td>
+                <td>{{ result['ca_uniser'] }}</td>
+                <td>{{ result['im_uniser'] }}</td>
+                <td>{{ result['im_uniser'] }}</td>
             </tr>
-           {% endfor %}
+            {% endfor %}
         </table>
     </div>
 </div>
@@ -248,27 +249,27 @@
 <!--        </table>-->
 <!--    </div>-->
 <!--</div>-->
-<div class="texto_final" style="padding-bottom: 10%;">
-    En señal de conformidad del servicio, el cliente firma el presente documento el {{ fecha }}
-</div>
+<!--<div class="texto_final" style="padding-bottom: 10%;">-->
+<!--    En señal de conformidad del servicio, el cliente firma el presente documento el 15 de mayo de 2021-->
+<!--</div>-->
 
 
-<div class="row" style="padding-bottom: 30%;">
-    <div class="column" style="text-align: center;">
-        <div>Firma del Cliente</div>
-    </div>
-    <div class="column" style="text-align: center;">
-        <div>Firma de Asesor</div>
-        <div><b>REINVENTING</b></div>
+<!--<div class="row" style="padding-bottom: 20%;">-->
+<!--    <div class="column" style="text-align: center;">-->
+<!--        <div>Firma del Cliente</div>-->
+<!--    </div>-->
+<!--    <div class="column" style="text-align: center;">-->
+<!--        <div>Firma de Asesor</div>-->
+<!--        <div><b>REINVENTING</b></div>-->
 
-        <!-- <h5>Firma de Asesor</h5>
-        <h4>REINVENTING</h4> -->
-    </div>
-    <div class="column" style="text-align: center;">
-        <div>Firma de Asesor</div>
-        <div><b>ACCESO</b></div>
-    </div>
-</div>
+<!--        &lt;!&ndash; <h5>Firma de Asesor</h5>-->
+<!--        <h4>REINVENTING</h4> &ndash;&gt;-->
+<!--    </div>-->
+<!--    <div class="column" style="text-align: center;">-->
+<!--        <div>Firma de Asesor</div>-->
+<!--        <div><b>ACCESO</b></div>-->
+<!--    </div>-->
+<!--</div>-->
 
 <div class="footer">
     Jr. Gregorio Paredes N° 418, Cercado, Lima – Teléfono (01) 3037033 – 942 974 189
