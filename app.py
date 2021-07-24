@@ -25,7 +25,6 @@ def current_date_format(date):
     messsage = "{} de {} del {}".format(day, month, year)
     return messsage
 
-
 global options, config
 path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
 config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
@@ -101,7 +100,6 @@ def index():
     # print(response)
     # return response
 
-
 @app.route('/gnrpdf/actadeservicios/<orden>/<tipo>', methods=['GET'])
 def actadeservicios(orden, tipo):
     try:
@@ -156,8 +154,6 @@ def actadeservicios(orden, tipo):
             "message": "Error Controlado"
         }
 
-
-
 @app.route('/gnrpdf/proformadeservicios/<orden>/<tipo>', methods=['GET'])
 def formulario_reinventing(orden, tipo):
     try:
@@ -210,7 +206,6 @@ def formulario_reinventing(orden, tipo):
             "codRes": "99",
             "message": "Error Controlado"
         }
-
 
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
@@ -289,6 +284,81 @@ def reporte_equas(lote, tipo):
             "message": "Error Controlado"
         }
 
+# multiservicios_blanco
+@app.route('/generarreporte/<tipo>', methods=['POST'])
+def generarreporte(tipo):
+    _json = request.json
+    try:
+        options = {
+            'page-size': 'A4',
+            'dpi': 300,
+            # 'disable-smart-shrinking': '',
+            'header-spacing': '4',
+            'footer-spacing': '2',
+            'footer-font-size': '10',
+            'header-font-size': '10',
+            # 'footer-center' : 'asdasdasd',
+            'footer-html' : 'http://127.0.0.1:5238/gnrpdf/static/footer_multi.html',
+            # 'margin-top': '0.2in',
+            # 'margin-right': '0.0in',
+            # 'margin-bottom': '0.3in',
+            # 'margin-left': '0.0in',
+            # 'margin-bottom': '0.3in',
+            'orientation': 'Landscape',
+            'disable-forms': '',
+            'encoding': "UTF-8",
+            'footer-right': '[page] / [topage]',
+            'custom-header': [
+                ('Accept-Encoding', 'gzip')
+            ],
+            # 'quiet': '',
+            # 'cookie': [
+            #     ('cookie-name1', 'cookie-value1'),
+            #     ('cookie-name2', 'cookie-value2'),
+            # ],
+            'no-outline': None
+        }
+
+        name = _json['id']
+
+
+        if True:
+            pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(name)
+            lima = pytz.timezone('America/Lima')
+            fechaactual = current_date_format(datetime.now(lima))
+            print(fechaactual)
+            rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual,
+                                       logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format(
+                                           "logo_equas_solid"), )
+
+            if tipo == "1":
+                pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, False, options=options, configuration=config)
+                response = make_response(pdf)
+                response.headers['Content-Type'] = 'aplication/pdf'
+                response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(name)
+                return response
+            if tipo == "2":
+                pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, pdffile, options=options, configuration=config)
+                return {
+                    "codRes": "00",
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", name)
+                }
+            # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
+
+            # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+            # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+
+
+        # else:
+        #     return "Error Controlado"
+    except ValueError:
+        print(ValueError)
+        return {
+            "codRes": "99",
+            "message": "Error Controlado"
+        }
 
 if __name__ == '__main__':
     app.run(debug=True, port=5238, host="0.0.0.0")

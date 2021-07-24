@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proforma</title>
+    <style>
+        table,
+        th,
+        td {
+            border-bottom: 1px solid black;
+            padding: 10px;
+        }
+
+        body {
+            width: 84%;
+            margin-left: 8%;
+            margin-right: 6%;
+        }
+
+        .titulo {
+            /* border: 1px solid black; */
+            text-align: center;
+            font-size: 20px;
+            /* text-decoration: underline; */
+            padding: 20px;
+        }
+
+        .tabla1 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla2 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla3 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla4 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla5 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .logo {
+            /* border: 1px solid black; */
+            padding: 20px;
+        }
+
+        .texto_final {
+            border: 1px solid white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer {
+            border-top: 1px solid black;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            margin-left: 25px;
+            float: left;
+            width: 30%;
+            padding: 10px;
+            /* height: 300px; */
+            /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .cuadros {
+            padding-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <img src="http://127.0.0.1:5238/gnrpdf/static/logoreinveintg.png" alt="logo" width="40%">
+    </div>
+    <div>
+        <!--    {{ fecha }}-->
+    </div>
+    <div class="titulo">
+        <b>{{ fecha }}</b>
+    </div>
+
+    <div class="cuadros">
+        <div>
+            <b>Servicio: {{ {{ json['id']}} }} </b>
+        </div>
+        <div class="tabla1">
+            <table style="width:100%">
+                <tr>
+                    <td>Operario:</td>
+                    <td style="width: 50%;">{{ json['operario']}}</td>
+                </tr>
+                <tr>
+                    <td>Tramitador/a:</td>
+                    <td style="width: 50%;">{{ json['temerario']}}</td>
+                </tr>
+                <tr>
+                    <td>Expediente:</td>
+                    <td style="width: 50%;">{{ json['expediente']}}</td>
+                </tr>
+                <tr>
+                    <td>Cita:</td>
+                    <td style="width: 50%;">{{ json['cita']}}</td>
+                </tr>
+                <tr>
+                    <td>Asegurado:</td>
+                    <td style="width: 50%;">{{ json['asegurado']}}</td>
+                </tr>
+                <tr>
+                    <td>Direccion:</td>
+                    <td style="width: 50%;">{{ json['direccion']}}</td>
+                </tr>
+                <tr>
+                    <td>Detalles:</td>
+                    <td style="width: 50%;">{{ json['detalles']}}</td>
+                </tr>
+                <tr>
+                    <td>Importante:</td>
+                    <td style="width: 50%;">{{ json['importante']}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>
