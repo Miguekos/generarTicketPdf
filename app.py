@@ -304,7 +304,8 @@ def generarreporte(tipo):
             # 'margin-bottom': '0.3in',
             # 'margin-left': '0.0in',
             # 'margin-bottom': '0.3in',
-            'orientation': 'Landscape',
+            # 'orientation': 'Landscape',
+            'orientation': 'Portrait',
             'disable-forms': '',
             'encoding': "UTF-8",
             'footer-right': '[page] / [topage]',
@@ -329,7 +330,7 @@ def generarreporte(tipo):
             print(fechaactual)
             rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual,
                                        logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format(
-                                           "logo_equas_solid"), )
+                                           "logo_multi_blanco"), )
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
