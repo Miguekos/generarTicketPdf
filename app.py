@@ -285,7 +285,7 @@ def reporte_equas(lote, tipo):
         }
 
 # multiservicios_blanco
-@app.route('/generarreporte/<tipo>', methods=['POST'])
+@app.route('/gnrpdf/generarreporte/<tipo>', methods=['POST'])
 def generarreporte(tipo):
     _json = request.json
     try:
