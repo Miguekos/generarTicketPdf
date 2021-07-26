@@ -138,7 +138,7 @@ def actadeservicios(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/actadeservicios_{}.pdf".format("http://127.0.0.1:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/actadeservicios_{}.pdf".format("http://95.111.235.214:5238", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
@@ -191,7 +191,7 @@ def formulario_reinventing(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/proforma_{}.pdf".format("http://127.0.0.1:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/proforma_{}.pdf".format("http://95.111.235.214:5238", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
@@ -267,7 +267,7 @@ def reporte_equas(lote, tipo):
                     rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
-                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", lote)
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:5238", lote)
                 }
             # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
@@ -344,7 +344,7 @@ def generarreporte(tipo):
                     rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
-                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://127.0.0.1:5238", name)
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:5238", name)
                 }
             # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
