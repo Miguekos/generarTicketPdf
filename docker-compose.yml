@@ -3,7 +3,6 @@ version: "2"
 services:
   covnertpdf:
     container_name: generarpdf_generico
-#    image: api_cayman:1.0
     build:
       context: .
       dockerfile: Dockerfile
