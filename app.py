@@ -328,9 +328,7 @@ def generarreporte(tipo):
             lima = pytz.timezone('America/Lima')
             fechaactual = current_date_format(datetime.now(lima))
             print(fechaactual)
-            rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual,
-                                       logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format(
-                                           "logo_multi_blanco"), )
+            rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual, logo="https://api.apps.com.pe/servermultiblanco/files/{}".format(_json['img']), )
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
