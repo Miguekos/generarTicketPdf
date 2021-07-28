@@ -320,7 +320,7 @@ def generarreporte(tipo):
             'no-outline': None
         }
 
-        name = _json['id']
+        name = _json['expediente']
 
 
         if True:
