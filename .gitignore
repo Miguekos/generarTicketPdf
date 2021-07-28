@@ -9,3 +9,5 @@
 *.ntvs*
 *.njsproj
 *.sln
+/venv/
+/fileserver/
