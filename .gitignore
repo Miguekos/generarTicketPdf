@@ -12,3 +12,4 @@
 *.njsproj
 *.sln
 /fileserver/
+/venv
