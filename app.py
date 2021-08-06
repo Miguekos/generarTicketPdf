@@ -59,7 +59,7 @@ options = {
 
 
 def delete_files(name):
-    os.remove("{}{}".format(app.config['PDF_FOLDER'], name))
+    os.remove("{}{}.pdf".format(app.config['PDF_FOLDER'], name))
 
 
 @app.route('/gnrpdf/fileserver/<filename>')
@@ -333,8 +333,10 @@ def generarreporte(tipo):
         }
 
         name = _json['expediente']
+        print("name", name)
         try:
             delete_files(name)
+            print("se elimino", name)
         except Exception as e:
             print("Exception no se pudo eliminar", e)
             pass
