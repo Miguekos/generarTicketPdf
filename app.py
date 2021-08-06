@@ -62,6 +62,12 @@ def delete_files(name):
     os.remove("{}{}.pdf".format(app.config['PDF_FOLDER'], name))
 
 
+@app.route('/gnrpdf/fileserverdelete/<filename>')
+def delete_any_file(filename):
+    delete_files(filename)
+    return "Delete Finish"
+
+
 @app.route('/gnrpdf/fileserver/<filename>')
 def uploaded_file(filename):
     return send_from_directory(app.config['PDF_FOLDER'], filename)
