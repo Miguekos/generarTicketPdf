@@ -25,6 +25,7 @@ def current_date_format(date):
     messsage = "{} de {} del {}".format(day, month, year)
     return messsage
 
+
 global options, config
 path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
 config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
@@ -34,15 +35,15 @@ options = {
     # 'disable-smart-shrinking': '',
     'header-spacing': '4',
     'footer-spacing': '2',
-    'footer-font-size' : '10',
-    'header-font-size' : '10',
+    'footer-font-size': '10',
+    'header-font-size': '10',
     # 'margin-top': '0.2in',
     # 'margin-right': '0.0in',
     # 'margin-bottom': '0.3in',
     # 'margin-left': '0.0in',
     # 'margin-bottom': '0.3in',
-    'orientation' : 'Portrait',
-    'disable-forms' : '',
+    'orientation': 'Portrait',
+    'disable-forms': '',
     'encoding': "UTF-8",
     'footer-right': '[page] / [topage]',
     'custom-header': [
@@ -56,15 +57,20 @@ options = {
     'no-outline': None
 }
 
+
+def delete_files(name):
+    os.remove("{}/{}".format(app.config['PDF_FOLDER'], name))
+
+
 @app.route('/gnrpdf/fileserver/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['PDF_FOLDER'],
-                               filename)
+    return send_from_directory(app.config['PDF_FOLDER'], filename)
+
 
 @app.route('/gnrpdf/static/<filename>')
 def uploaded_file_static(filename):
-    return send_from_directory(app.config['STATIC'],
-                               filename)
+    return send_from_directory(app.config['STATIC'], filename)
+
 
 @app.route('/imprimirticketpdf', methods=['POST'])
 def index():
@@ -100,6 +106,7 @@ def index():
     # print(response)
     # return response
 
+
 @app.route('/gnrpdf/actadeservicios/<orden>/<tipo>', methods=['GET'])
 def actadeservicios(orden, tipo):
     try:
@@ -124,7 +131,8 @@ def actadeservicios(orden, tipo):
                 print("js_servic", js_servic)
                 js_articu = response['operac'][0]['f_js_acta_operac']['js_articu']
                 print("js_servic", js_servic)
-                rendered = render_template('actadeservicios_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [], js_articu=js_articu if js_articu else [], fecha=fechaactual)
+                rendered = render_template('actadeservicios_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [],
+                                           js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
                     pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
@@ -154,6 +162,7 @@ def actadeservicios(orden, tipo):
             "message": "Error Controlado"
         }
 
+
 @app.route('/gnrpdf/proformadeservicios/<orden>/<tipo>', methods=['GET'])
 def formulario_reinventing(orden, tipo):
     try:
@@ -177,7 +186,8 @@ def formulario_reinventing(orden, tipo):
                 js_servic = response['operac'][0]['f_js_proforma_operac']['js_servic']
                 print("js_servic", js_servic)
                 js_articu = response['operac'][0]['f_js_proforma_operac']['js_articu']
-                rendered = render_template('formulario_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [], js_articu=js_articu if js_articu else [], fecha=fechaactual)
+                rendered = render_template('formulario_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [],
+                                           js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
                     pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
@@ -206,6 +216,7 @@ def formulario_reinventing(orden, tipo):
             "codRes": "99",
             "message": "Error Controlado"
         }
+
 
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
@@ -284,6 +295,7 @@ def reporte_equas(lote, tipo):
             "message": "Error Controlado"
         }
 
+
 # multiservicios_blanco
 @app.route('/gnrpdf/generarreporte/<tipo>', methods=['POST'])
 def generarreporte(tipo):
@@ -298,7 +310,7 @@ def generarreporte(tipo):
             'footer-font-size': '10',
             'header-font-size': '10',
             # 'footer-center' : 'asdasdasd',
-            'footer-html' : 'http://127.0.0.1:5238/gnrpdf/static/footer_multi.html',
+            'footer-html': 'http://127.0.0.1:5238/gnrpdf/static/footer_multi.html',
             # 'margin-top': '0.2in',
             # 'margin-right': '0.0in',
             # 'margin-bottom': '0.3in',
@@ -321,7 +333,7 @@ def generarreporte(tipo):
         }
 
         name = _json['expediente']
-
+        delete_files(name)
 
         if True:
             pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(name)
@@ -353,7 +365,6 @@ def generarreporte(tipo):
             # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
             # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
 
-
         # else:
         #     return "Error Controlado"
     except ValueError:
@@ -362,6 +373,7 @@ def generarreporte(tipo):
             "codRes": "99",
             "message": "Error Controlado"
         }
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=5238, host="0.0.0.0")
