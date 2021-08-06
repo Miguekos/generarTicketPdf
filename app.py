@@ -344,8 +344,6 @@ def generarreporte(tipo):
             import time
             delete_files(name)
             print("se elimino", name)
-            print("Esperando 10 seg")
-            time.sleep(10)
         except Exception as e:
             print("Exception no se pudo eliminar", e)
             pass
