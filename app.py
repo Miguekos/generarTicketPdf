@@ -364,7 +364,7 @@ def generarreporte(tipo):
                     rendered, False, options=options, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
-                response.headers['Content-Disposition'] = 'attachment; filename=reporte_equas_{}.pdf'.format(name)
+                response.headers['Content-Disposition'] = 'attachment; filename=reporte_multi_blanco_{}.pdf'.format(name)
                 return response
             if tipo == "2":
                 pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
