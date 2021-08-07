@@ -340,13 +340,13 @@ def generarreporte(tipo):
 
         name = _json['expediente']
         print("name", name)
-        try:
-            import time
-            delete_files(name)
-            print("se elimino", name)
-        except Exception as e:
-            print("Exception no se pudo eliminar", e)
-            pass
+        # try:
+        #     import time
+        #     delete_files(name)
+        #     print("se elimino", name)
+        # except Exception as e:
+        #     print("Exception no se pudo eliminar", e)
+        #     pass
 
         if True:
             pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(name)
