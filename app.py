@@ -8,6 +8,7 @@ import json
 import os
 from datetime import datetime
 import qrcode  # Importamos el modulo necesario para trabajar con codigos QR
+from itertools import groupby
 
 app = Flask(__name__)
 app.config['PDF_FOLDER'] = 'fileserver/'
@@ -137,7 +138,8 @@ def actadeservicios(orden, tipo):
                 print("js_servic", js_servic)
                 js_articu = response['operac'][0]['f_js_acta_operac']['js_articu']
                 print("js_servic", js_servic)
-                rendered = render_template('actadeservicios_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [],
+                rendered = render_template('actadeservicios_reinventing.html', orden=orden, json=response['operac'],
+                                           js_servic=js_servic if js_servic else [],
                                            js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
@@ -192,7 +194,8 @@ def formulario_reinventing(orden, tipo):
                 js_servic = response['operac'][0]['f_js_proforma_operac']['js_servic']
                 print("js_servic", js_servic)
                 js_articu = response['operac'][0]['f_js_proforma_operac']['js_articu']
-                rendered = render_template('formulario_reinventing.html', orden=orden, json=response['operac'], js_servic=js_servic if js_servic else [],
+                rendered = render_template('formulario_reinventing.html', orden=orden, json=response['operac'],
+                                           js_servic=js_servic if js_servic else [],
                                            js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
                 if tipo == "1":
@@ -268,8 +271,103 @@ def reporte_equas(lote, tipo):
             pdffile = app.config['PDF_FOLDER'] + '{}.pdf'.format(lote)
             lima = pytz.timezone('America/Lima')
             fechaactual = current_date_format(datetime.now(lima))
-            print(fechaactual)
-            rendered = render_template('reporte_equas.html', json=response, fecha=fechaactual,
+            # print(fechaactual)
+
+            count_list = []
+            cant_lotes = []
+            lotes = []
+            lotes_newlist = []
+            cabecera = []
+            cabecera_newlist = []
+            punto_muestreo = []
+            punto_muestreo_newlist = []
+            parametros = []
+            parametros_newlist = []
+            unidades = []
+            unidades_newlist = []
+
+            print("len", len(response['result']))
+
+            for x in response['result']:
+                parametros.append(x['parametro'])
+                unidades.append(x['unidades'])
+                lotes.append(x['cod_muestra'])
+                punto_muestreo.append(x['punto_muestreo'])
+                # print(x['parametro'])
+
+            for element in punto_muestreo:
+                if element not in punto_muestreo_newlist:
+                    punto_muestreo_newlist.append(element)
+
+            for element in parametros:
+                if element not in parametros_newlist:
+                    parametros_newlist.append(element)
+
+            for element in unidades:
+                if element not in unidades_newlist:
+                    unidades_newlist.append(element)
+
+            for element in lotes:
+                if element not in lotes_newlist:
+                    lotes_newlist.append(element)
+
+            # max_cant = []
+
+            # max_cant.append(len(parametros_newlist))
+            print("parametros_newlist", len(parametros_newlist))
+            print("unidades_newlist", len(unidades_newlist))
+            print("lotes_newlist", len(lotes_newlist))
+
+
+            INFO = response['result']
+
+
+            INFO_list = []
+
+            # define a fuction for key
+            def key_func(k):
+                return k['cod_muestra']
+
+            # sort INFO data by 'company' key.
+            INFO = sorted(INFO, key=key_func)
+
+            for key, value in groupby(INFO, key_func):
+                # print(key)
+                # print(len(list(value)))
+                INFO_list.append({
+                    key : list(value)
+                })
+                # max_cant.append(len(list(value)))
+                # print("--> ",list(value))
+            # print("max_cant", max_cant)
+            print("INFO_list", INFO_list)
+            # max_value = max(max_cant)
+            # print("max_value", max_value)
+
+            cc = 0
+            while cc < len(parametros_newlist):
+                count_list.append(cc)
+                cc = cc + 1
+
+            ff = 0
+            while ff < len(lotes_newlist):
+                cant_lotes.append(ff)
+                ff = ff + 1
+
+            nueva_unidad = []
+            print("unidades_newlist[uu]", unidades_newlist[0])
+            uu = 0
+            while uu < len(parametros_newlist):
+                nueva_unidad.append(unidades[uu])
+                uu = uu + 1
+
+            print("nueva_unidad", nueva_unidad)
+
+            # count_list = [1,2]
+            print("count_list", count_list)
+
+            rendered = render_template('reporte_equas_new.html', INFO_list=INFO_list, punto_muestreo_newlist=punto_muestreo_newlist, count_list=count_list, json=response, lotes_newlist=lotes_newlist,
+                                       unidades=nueva_unidad, cant_lotes=cant_lotes, parametros=parametros_newlist, fecha=fechaactual,
                                        logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
 
             if tipo == "1":

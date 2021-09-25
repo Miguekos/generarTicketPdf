@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Reporte Equas</title>
+
+    <style>
+        body {
+            font-family: arial, sans-serif;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            page-break-inside: avoid !important;
+        }
+
+        th {
+            width: 4%;
+            border: 1px solid #dddddd;
+            text-align: center;
+            padding-left: 4px;
+            padding-right: 4px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+
+        td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 10px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+
+    </style>
+</head>
+
+<body style="border:0; margin: 0;" onload="subst()">
+<!--    <div class="logo">-->
+<!--        <img src="http://127.0.0.1:5238/gnrpdf/static/logo_equas_solid.png" alt="logo" width="20%">-->
+<!--    </div>-->
+<div style="padding-bottom: 8px; padding-top: 2px;">
+    <div style="text-align: left;">
+
+    </div>
+    <div style="">
+        EQUAS - INFORME PRELIMINAR
+        <span style="float: right;"> Fecha: {{ fecha }} </span>
+    </div>
+</div>
+<div style="border: 1px solid black;">
+</div>
+<div>
+    <div style="padding-bottom: 6px; padding-top: 6px;"> Lote: {{json['lote'] }}</div>
+    <div style="padding-bottom: 6px;"> Proyecto: {{json['proyecto'] }}</div>
+    <div style="padding-bottom: 6px;"> Departamento: {{json['region'] }}</div>
+    <div style="padding-bottom: 6px;"> Provincia: {{json['ciudad'] }}</div>
+    <div style="padding-bottom: 6px;"> Distrito: {{json['distrito'] }}</div>
+    <div style="padding-bottom: 6px;"> Matriz: {{json['matriz'] }}</div>
+    <div style="padding-bottom: 6px;"> Fecha Muestreo: {{json['fechaMuestreo'] }}</div>
+    <div style="padding-bottom: 6px;"> Fecha Recepcion: {{json['fechaRecepcion'] }}</div>
+    <div style="padding-bottom: 6px;"> Fecha Final: {{json['fechaFinal'] }}</div>
+    <div style="padding-bottom: 10px;"> Estado: {{json['estado'] }}</div>
+</div>
+<div>
+    <table>
+        <tr style="padding: 10px">
+<!--            {{INFO_list}}-->
+<!--            {{lotes_newlist[1]}}-->
+<!--            {{ INFO_list[0][lotes_newlist[0]][0]['resultado'] }}-->
+<!--            {{ INFO_list[0][lotes_newlist[0]][1]['resultado'] }}-->
+<!--            {{ lotes_newlist }}-->
+            <th>PARÁMETROS</th>
+            <th>Expresado <br> en:</th>
+            {% for result in cant_lotes %}
+            <th>
+               <div style="border-bottom: 1px solid black; padding-bottom: 2%;">
+                   {{ lotes_newlist[result] }}
+               </div>
+                <div style="padding-top: 2%;">
+                    {{ punto_muestreo_newlist[result] }}
+                </div>
+            </th>
+            {% endfor %}
+        </tr>
+        <!--        {% for result in json['result'] %}-->
+        <!--        <tr style="page-break-inside: avoid !important;">-->
+        <!--            <td>Bario</td>-->
+        <!--            -->
+        <!--            <td>{{result['resultado']}}</td>-->
+        <!--            -->
+        <!--        </tr>-->
+        <!--        <tr style="page-break-inside: avoid !important;">-->
+        <!--            <td>Cadmio</td>-->
+        <!--            -->
+        <!--            <td>{{result['resultado']}}</td>-->
+        <!--            -->
+        <!--        </tr>-->
+        <!--        <tr style="page-break-inside: avoid !important;">-->
+        <!--            <td>Cianuro Total</td>-->
+        <!--            -->
+        <!--            <td>{{result['resultado']}}</td>-->
+        <!--            -->
+        <!--        </tr>-->
+        <!--        {% endfor %}-->
+        {% for result in count_list %}
+        <tr style="page-break-inside: avoid !important;">
+
+            <td> {{ parametros[result] }}</td>
+            <td style="text-align: center"> {{ unidades[result] }}</td>
+            {% for result2 in cant_lotes %}
+            <td style="text-align: center"> {{ INFO_list[0][lotes_newlist[0]][result]['resultado'] }} </td>
+            {% endfor %}
+
+        </tr>
+        {% endfor %}
+
+
+<!--        {% for result in totaldata %}-->
+<!--        <tr style="page-break-inside: avoid !important;">-->
+
+<!--            <td> parametros -> {{result['parametros']}}</td>-->
+<!--            <td> unidades -> {{result['unidades']}}</td>-->
+
+<!--        </tr>-->
+<!--        {% endfor %}-->
+
+<!--        {% for result in unidades %}-->
+<!--        <tr style="page-break-inside: avoid !important;">-->
+
+<!--            <td> unidades -> {{result}}</td>-->
+
+<!--        </tr>-->
+<!--        {% endfor %}-->
+
+<!--        <tr style="page-break-inside: avoid !important;">-->
+<!--        {% for result in unidades %}-->
+<!--            <td> unidades1 -> {{result}}</td>-->
+<!--        {% endfor %}-->
+<!--        </tr>-->
+
+
+
+        <!--        <tr style="page-break-inside: avoid !important;">-->
+        <!--            <td>Cadmio</td>-->
+        <!--            {% for result in json['result'] %}-->
+        <!--            <td>{{result['resultado']}}</td>-->
+        <!--            {% endfor %}-->
+        <!--        </tr>-->
+        <!--        <tr style="page-break-inside: avoid !important;">-->
+        <!--            <td>Cianuro Total</td>-->
+        <!--            {% for result in json['result'] %}-->
+        <!--            <td>{{result['resultado']}}</td>-->
+        <!--            {% endfor %}-->
+        <!--        </tr>-->
+    </table>
+</div>
+</body>
+
+</html>
