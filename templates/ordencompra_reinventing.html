@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Proforma</title>
+    <style>
+        /*
+        table,
+        th,
+        td {
+            border: 1px solid black;
+        }
+        */
+
+        body {
+            width: 84%;
+            margin-left: 8%;
+            margin-right: 6%;
+        }
+
+        .titulo {
+            /* border: 1px solid black; */
+            text-align: center;
+            font-size: 20px;
+            /* text-decoration: underline; */
+            padding: 20px;
+        }
+
+        .tabla1 {
+        border: 1px solid black;
+            /*
+             text-align: center;
+            padding: 0px 10px 0px 10px; */
+        }
+
+        /*
+        td, th {
+          border: 1px solid #dddddd;
+          text-align: left;
+          padding: 8px;
+        }
+
+        tr:nth-child(even) {
+          background-color: #dddddd;
+        }
+        */
+
+        .tabla2 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla3 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla4 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .tabla5 {
+            border: 1px solid black;
+            /* text-align: center; */
+            padding: 0px 10px 0px 10px;
+        }
+
+        .logo {
+            /* border: 1px solid black; */
+            padding: 20px;
+        }
+
+        .texto_final {
+            border: 1px solid white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer {
+            padding-top: 10%;
+            border-bottom: 1px solid black;
+            text-align: center;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        /* Create two equal columns that floats next to each other */
+        .column {
+            margin-left: 25px;
+            float: left;
+            width: 30%;
+            padding: 10px;
+            /* height: 300px; */
+            /* Should be removed. Only for demonstration */
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .cuadros {
+            padding-bottom: 20px;
+        }
+
+
+    </style>
+</head>
+
+<body>
+<div class="logo">
+    <img src="http://127.0.0.1:5238/gnrpdf/static/logoreinveintg.png" alt="logo" width="40%">
+</div>
+<div>
+    <!--    {{ fecha }}-->
+</div>
+<div class="titulo" style="padding-bottom: 30px; color: #4caf50;">
+    <b>ORDEN DE COMPRA N° {{ json[0]['f_js_docume_ordcom']['id_ordcom'] }}</b>
+</div>
+
+<div class="cuadros">
+    <!--    <div>-->
+    <!--        <b>CLIENTE:</b>-->
+    <!--    </div>-->
+    <!--    <div class="tabla1">-->
+    <table style="width:100%">
+        <tr>
+            <td>Señores</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['no_person'] }}</td>
+        </tr>
+        <tr>
+            <td>Dirección</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['no_direcc'] }}</td>
+        </tr>
+        <tr>
+            <td>RUC</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['co_docide'] }}</td>
+        </tr>
+        <tr>
+            <td>Atención</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['no_atenci'] }}</td>
+        </tr>
+        <tr>
+            <td>Fecha</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['fe_ordcom'] }}</td>
+        </tr>
+        <tr>
+            <td>Motivo de compra</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['de_motcom'] }}</td>
+        </tr>
+        <tr>
+            <td>Moneda</td>
+            <td style="width: 70%; padding-bottom: 20px">: {{ json[0]['f_js_docume_ordcom']['no_moneda'] }}</td>
+        </tr>
+    </table>
+    <!--    </div>-->
+</div>
+<!--<div class="cuadros">-->
+<!--    <div>-->
+<!--        <b>PROFORMA:</b>-->
+<!--    </div>-->
+<!--    <div class="tabla1">-->
+<!--        <table style="width:100%">-->
+<!--            <tr>-->
+<!--                <td>Operación:</td>-->
+<!--                <td style="width: 50%;">{{ json }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Fecha:</td>-->
+<!--                <td style="width: 50%;">{{ json }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Neto:</td>-->
+<!--                <td style="width: 50%;">{{ json }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>IGV:</td>-->
+<!--                <td style="width: 50%;">{{ json }}</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>Total:</td>-->
+<!--                <td style="width: 50%;">{{ json }}</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+<div>
+    <!--    DETALLE DE PROFORMA:-->
+</div>
+<div class="cuadros" style="padding-bottom: 70px">
+    <div>
+        <!--        <b>Servicios</b>-->
+    </div>
+    <div class="tabla1">
+        <table style="width:100%; border-collapse: collapse;">
+            <tr>
+                <th style="text-align: left">Cantidad</th>
+                <th style="text-align: left">Unidad</th>
+                <th style="text-align: left">Descripción</th>
+                <th style="text-align: right">V. Unitario</th>
+                <th style="text-align: right">Subtotal</th>
+                <th style="text-align: right">IGV</th>
+                <th style="text-align: right">Total</th>
+            </tr>
+            {% for result in js_articu %}
+            <tr>
+                <td style="border: 1px solid black; text-align: left">{{ result['ca_articu'] }}</td>
+                <td style="border: 1px solid black; text-align: left"> {{ result['va_unimed']}}</td>
+                <td style="border: 1px solid black; text-align: left">{{ result['de_articu'] }}</td>
+                <td style="border: 1px solid black; text-align: right"> {{ result['im_preuni'] }}</td>
+                <td style="border: 1px solid black; text-align: right">{{ result['im_subtot'] }}</td>
+                <td style="border: 1px solid black; text-align: right">{{ result['im_subigv'] }}</td>
+                <td style="border: 1px solid black; text-align: right">{{ result['im_totcom'] }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+
+<div class="cuadros">
+    <div>
+        <b>Información para facturación:</b>
+    </div>
+    <!--    <div class="tabla1">-->
+    <table style="width:100%">
+        <tr>
+            <td>Facturar a nombre de</td>
+            <td style="width: 70%; padding-bottom: 20px;">: {{ json[0]['f_js_docume_ordcom']['no_peremp'] }}</td>
+        </tr>
+        <tr>
+            <td>Dirección fiscal</td>
+            <td style="width: 70%; padding-bottom: 20px;">: {{ json[0]['f_js_docume_ordcom']['no_diremp'] }}</td>
+        </tr>
+        <tr>
+            <td>RUC</td>
+            <td style="width: 70%; padding-bottom: 20px;">: {{ json[0]['f_js_docume_ordcom']['co_docemp'] }}</td>
+        </tr>
+    </table>
+    <!--    </div>-->
+</div>
+<!--<div class="cuadros">-->
+<!--    <div>-->
+<!--        <b>TRABAJOS REALIZADOS POR TALLER:</b>-->
+<!--    </div>-->
+<!--    <div class="tabla1">-->
+<!--        <table style="width:100%">-->
+<!--            <tr>-->
+<!--                <td>PRUEBA QUINQUENAL TIPO I</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CERTIFICACION ANUAL GNV</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CAMBIO DE BASE DE RIEL DE INYECTORES</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CAMBIO DE BUJIAS DE ENCENDIDO (4)</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>CAMBIO DE BASE DE RIEL DE INYECTORES</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td>MANGUERA DE FILTRO DE GAS</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--    </div>-->
+<!--</div>-->
+<!--<div class="texto_final" style="padding-bottom: 10%;">-->
+<!--    En señal de conformidad del servicio, el cliente firma el presente documento el 15 de mayo de 2021-->
+<!--</div>-->
+
+
+<div class="row" style="padding-bottom: 20%; padding-top: 10%;">
+    <div class="column" style="text-align: center;">
+<!--        <div>Firma del Cliente</div>-->
+    </div>
+    <div class="column" style="text-align: center;">
+<!--        <div>Firma de Asesor</div>-->
+<!--        <div><b>REINVENTING</b></div>-->
+
+        <!-- <h5>Firma de Asesor</h5>
+        <h4>REINVENTING</h4> -->
+    </div>
+    <div class="column" style="text-align: center;">
+        <div><b>{{ json[0]['f_js_docume_ordcom']['no_perfir'] }}</b></div>
+        <div>Compras</div>
+    </div>
+</div>
+
+<div class="footer">
+    Jr. Gregorio Paredes N° 418, Cercado, Lima – Teléfono (01) 3037033 – 942 974 189
+</div>
+
+</body>
+
+</html>

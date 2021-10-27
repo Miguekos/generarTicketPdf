@@ -227,6 +227,62 @@ def formulario_reinventing(orden, tipo):
         }
 
 
+@app.route('/gnrpdf/ordencompra/<orden>/<tipo>', methods=['GET'])
+def ordencompra_reinventing(orden, tipo):
+    try:
+        print(orden)
+        url = 'https://api.reinventing.com.pe/v2.0/pdf/f_js_docume_ordcom/{}'.format(orden)
+        headers = {'content-type': 'application/json'}
+        # body = {
+        #     "id": orden
+        # }
+        # data = json.dumps(body)
+        x = requests.get(url, headers=headers)
+        response = json.loads(x.content)
+        print("cuenta", response)
+        if response['res'] == "ok":
+            d = 1
+            if d == 1:
+                pdffile = app.config['PDF_FOLDER'] + 'ordencompra_{}.pdf'.format(orden)
+                lima = pytz.timezone('America/Lima')
+                fechaactual = current_date_format(datetime.now(lima))
+                print(fechaactual)
+                # js_servic = response
+                # print("js_servic", js_servic)
+                js_articu = response['ordcom'][0]['f_js_docume_ordcom']['js_articu']
+                print("js_articu",js_articu)
+                rendered = render_template('ordencompra_reinventing.html', orden=orden, json=response['ordcom'],
+                                           js_articu=js_articu if js_articu else [], fecha=fechaactual)
+
+                if tipo == "1":
+                    pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                        rendered, False, options=options, configuration=config)
+                    response = make_response(pdf)
+                    response.headers['Content-Type'] = 'aplication/pdf'
+                    response.headers['Content-Disposition'] = 'attachment; filename=ordencompra_{}.pdf'.format(orden)
+                    return response
+                if tipo == "2":
+                    pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                        rendered, pdffile, options=options, configuration=config)
+                    return {
+                        "codRes": "00",
+                        "message": "{}/gnrpdf/fileserver/ordencompra_{}.pdf".format("http://95.111.235.214:5238", orden)
+                    }
+                # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
+
+                # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+                # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+
+        else:
+            return "Error Controlado"
+    except ValueError:
+        print(ValueError)
+        return {
+            "codRes": "99",
+            "message": "Error Controlado"
+        }
+
+
 @app.route('/gnrpdf/reporte_equas/<lote>/<tipo>', methods=['GET'])
 def reporte_equas(lote, tipo):
     try:
