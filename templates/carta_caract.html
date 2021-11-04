@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Carta</title>
+</head>
+
+<body class="">
+
+<div style="margin-left: 4%; margin-right: 6%;">
+    <br>
+    <section class="info text-primary container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="text-primary" align="right" style="font-size: 18px">
+            {{ json['no_fecini'] }}
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="text-primary" align="left" style="font-size: 16px">
+            <div>
+                {{ json['no_financ'] }}
+            </div>
+            <br>
+            <div>
+                {{ json['no_inicio'] }}
+            </div>
+            <br>
+            <div>
+                {{ json['no_saludo'] }}
+            </div>
+            <br>
+
+        </div>
+        <div class="info-personal">
+            <!--            {{ json }}-->
+            <p align="justify" style="line-height: 20px;">
+                {{ json['no_mensaj'] }}
+                <br>
+                <br>
+
+            </p>
+            <br>
+            <div class="text-primary" align="left" style="font-size: 16px">
+                <div>
+                    Marca: {{ json['no_marveh'] }}
+                </div>
+                <br>
+                <div>
+                    Modelo: {{ json['no_modveh'] }}
+                </div>
+                <br>
+                <div>
+                    Año de Fabricación: {{ json[''] }}
+                </div>
+                <br>
+                <div>
+                    Año Modelo: {{ json[''] }}
+                </div>
+                <br>
+                <div>
+                    Versión: {{ json['no_verveh'] }}
+                </div>
+                <br>
+                <div>
+                    Número de chasis: {{ json['nu_serveh'] }}
+                </div>
+                <br>
+                <div>
+                    Número de motor: {{ json['nu_motveh'] }}
+                </div>
+                <br>
+                <div>
+                    Color: {{ json['no_colveh'] }}
+                </div>
+                <br>
+                <div>
+                    N° Asientos: {{ json['nu_asiveh'] }}
+                </div>
+                <br>
+                <div>
+                    Carrocería: {{ json['no_carroc'] }}
+                </div>
+                <br>
+                <div>
+                    Precio Total USS$: {{ json['im_pretot'] }}
+                </div>
+                <br>
+                <div>
+                    Cuota inicial USS$: {{ json['im_cuoini'] }}
+                </div>
+                <br>
+                <div>
+                    Monto a Financiar USS$: {{ json['im_monfin'] }}
+                </div>
+                <br>
+
+                <p align="justify" style="line-height: 20px;">
+
+                    <br>
+                    <br>
+                    {{ json['v_no_msjfin'] }}
+                    <br>
+                    <br>
+                    {{ json['no_siotpa'] }}
+                    <br>
+                    <br>
+                    {{ json['no_atenta'] }}
+                </p>
+
+            </div>
+
+        </div>
+    </section>
+</div>
+</body>
+<style>
+  * {
+    margin: 100;
+    text-decoration: none;
+    list-style: none;
+    padding: 0;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .header {
+    height: 70px;
+<!--    background-color: #f8713c;-->
+    padding: 5px;
+  }
+
+  .heade__img {
+    height: inherit;
+  }
+
+  .info {
+<!--    background-color: #f3f3f3;-->
+    padding: 20px;
+  }
+
+  .info-personal__nombres {
+    font-size: 1em;
+  }
+
+  .info-personal__dni {
+    font-size: 0.75em;
+  }
+
+  .info-personal__cuenta {
+    margin: 10px 0;
+  }
+
+  .cuenta-datos {
+    margin: 0 165px;
+  }
+
+  .cuenta-datos__credito {
+    margin: 20px 40px;
+    float: left;
+  }
+
+  .cuenta-datos__fecha {
+    margin: 20px 40px;
+    float: left;
+  }
+
+  .cuenta-datos--center {
+    text-align: center;
+  }
+
+  .cuenta-datos--barra {
+    border-bottom: 1.8px solid #737373;
+  }
+
+  .info-pago {
+    clear: both;
+  }
+
+  .detalles-pago__left {
+    float: left;
+  }
+
+  .detalles-pago__right {
+    float: right;
+  }
+
+  .info-operaciones {
+    clear: both;
+  }
+
+  .divider {
+    margin: 4px 0 6px;
+  }
+
+  .detalles-pago__tabla {
+    width: 350px;
+    margin: 20px 0;
+  }
+
+  .detalles-pago__tabla td {
+    border: 1px solid #737373;
+    padding: 5px 10px;
+    width: 175px;
+  }
+
+  .tabla-operaciones {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    text-align: center;
+  }
+
+  .tabla-operaciones th {
+    border: 1px solid #737373;
+  }
+
+  .tabla-operaciones td {
+    padding: 5px 10px;
+  }
+
+  .tabla-operaciones-body {
+    border: 1px solid #737373;
+  }
+
+  .tabla-cuotas td {
+    border: 1px solid #737373;
+    padding: 5px 10px;
+    text-align: center;
+  }
+
+  .tabla-cuotas {
+    margin: 10px 0;
+  }
+
+  .leyenda {
+    margin: 20px 0;
+    font-size: 0.9em;
+  }
+
+  .footer {
+    background-color: #dadada;
+    padding: 20px;
+    font-size: 0.8em;
+  }
+
+  .text-primary {
+<!--    color: #2d559a;-->
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+</html>

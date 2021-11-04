@@ -250,7 +250,7 @@ def ordencompra_reinventing(orden, tipo):
                 # js_servic = response
                 # print("js_servic", js_servic)
                 js_articu = response['ordcom'][0]['f_js_docume_ordcom']['js_articu']
-                print("js_articu",js_articu)
+                print("js_articu", js_articu)
                 rendered = render_template('ordencompra_reinventing.html', orden=orden, json=response['ordcom'],
                                            js_articu=js_articu if js_articu else [], fecha=fechaactual)
 
@@ -267,6 +267,60 @@ def ordencompra_reinventing(orden, tipo):
                     return {
                         "codRes": "00",
                         "message": "{}/gnrpdf/fileserver/ordencompra_{}.pdf".format("http://95.111.235.214:5238", orden)
+                    }
+                # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
+
+                # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+                # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+
+        else:
+            return "Error Controlado"
+    except ValueError:
+        print(ValueError)
+        return {
+            "codRes": "99",
+            "message": "Error Controlado"
+        }
+
+
+@app.route('/gnrpdf/cartacaract/<orden>/<tipo>', methods=['GET'])
+def cartacaract(orden, tipo):
+    try:
+        print(orden)
+        url = 'https://api.reinventing.com.pe/v2.0/pdf/js_carta_caracteristica/{}'.format(orden)
+        headers = {'content-type': 'application/json'}
+        # body = {
+        #     "id": orden
+        # }
+        # data = json.dumps(body)
+        x = requests.get(url, headers=headers)
+        response = json.loads(x.content)
+        print("cuenta", response)
+        if response['res'] == "ok":
+            d = 1
+            if d == 1:
+                pdffile = app.config['PDF_FOLDER'] + 'carta_caract_{}.pdf'.format(orden)
+                lima = pytz.timezone('America/Lima')
+                fechaactual = current_date_format(datetime.now(lima))
+                print(fechaactual)
+                # js_servic = response
+                # print("js_servic", js_servic)
+                # js_articu = response['ordcom'][0]['f_js_docume_ordcom']['js_articu']
+                rendered = render_template('carta_caract.html', orden=orden, json=response['operac'][0]['f_js_carta_caract'], fecha=fechaactual)
+
+                if tipo == "1":
+                    pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                        rendered, False, options=options, configuration=config)
+                    response = make_response(pdf)
+                    response.headers['Content-Type'] = 'aplication/pdf'
+                    response.headers['Content-Disposition'] = 'attachment; filename=carta_caract_{}.pdf'.format(orden)
+                    return response
+                if tipo == "2":
+                    pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                        rendered, pdffile, options=options, configuration=config)
+                    return {
+                        "codRes": "00",
+                        "message": "{}/gnrpdf/fileserver/carta_caract_{}.pdf".format("http://95.111.235.214:5238", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
@@ -374,9 +428,7 @@ def reporte_equas(lote, tipo):
             print("unidades_newlist", len(unidades_newlist))
             print("lotes_newlist", len(lotes_newlist))
 
-
             INFO = response['result']
-
 
             INFO_list = []
 
@@ -391,7 +443,7 @@ def reporte_equas(lote, tipo):
                 # print(key)
                 # print(len(list(value)))
                 INFO_list.append({
-                    key : list(value)
+                    key: list(value)
                 })
                 # max_cant.append(len(list(value)))
                 # print("--> ",list(value))
@@ -422,7 +474,8 @@ def reporte_equas(lote, tipo):
             # count_list = [1,2]
             print("count_list", count_list)
 
-            rendered = render_template('reporte_equas_new.html', INFO_list=INFO_list, punto_muestreo_newlist=punto_muestreo_newlist, count_list=count_list, json=response, lotes_newlist=lotes_newlist,
+            rendered = render_template('reporte_equas_new.html', INFO_list=INFO_list, punto_muestreo_newlist=punto_muestreo_newlist,
+                                       count_list=count_list, json=response, lotes_newlist=lotes_newlist,
                                        unidades=nueva_unidad, cant_lotes=cant_lotes, parametros=parametros_newlist, fecha=fechaactual,
                                        logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
 
