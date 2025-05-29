@@ -15,6 +15,6 @@ RUN pip install -r requeriments.txt
 COPY ["." ,  "/app/"]
 #COPY . /app
 
-EXPOSE 5238
+EXPOSE 80
 
 #CMD [ "python" , "app.py" ]

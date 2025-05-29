@@ -95,17 +95,17 @@ def index():
     # path_wkthmltopdf = 'wkhtmltox/bin/wkhtmltopdf.exe'
     # config = pdfkit.configuration(wkhtmltopdf=path_wkthmltopdf)
     rendered = render_template('test.html', json=_json,
-                               pdf="http://127.0.0.1:5238/gnrpdf/fileserver/tickets/{}.png".format(
+                               pdf="http://127.0.0.1:80/gnrpdf/fileserver/tickets/{}.png".format(
                                    _json['registro']['registro']),
-                               qr="http://127.0.0.1:5238/gnrpdf/fileserver/tickets/{}.png".format(
+                               qr="http://127.0.0.1:80/gnrpdf/fileserver/tickets/{}.png".format(
                                    _json['registro']['registro']))
     # css = ['estado.css']
-    print("http://127.0.0.1:5238/fileserver/tickets/{}.png".format(_json['registro']['registro']))
+    print("http://127.0.0.1:80/fileserver/tickets/{}.png".format(_json['registro']['registro']))
     pdf = pdfkit.from_string(rendered, pdffile)
     # pdf = pdfkit.from_string(rendered, False, css=css, configuration=config)
     # pdf = pdfkit.from_string(rendered, pdffile, configuration=config)
 
-    return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+    return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
 
     # response = make_response(pdf)
     # response.headers['Content-Type'] = 'aplication/pdf'
@@ -154,12 +154,12 @@ def actadeservicios(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/actadeservicios_{}.pdf".format("http://95.111.235.214:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/actadeservicios_{}.pdf".format("http://95.111.235.214:80", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-                # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-                # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+                # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+                # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
 
         else:
             return "Error Controlado"
@@ -210,12 +210,12 @@ def formulario_reinventing(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/proforma_{}.pdf".format("http://95.111.235.214:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/proforma_{}.pdf".format("http://95.111.235.214:80", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-                # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-                # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+                # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+                # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
 
         else:
             return "Error Controlado"
@@ -266,12 +266,12 @@ def ordencompra_reinventing(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/ordencompra_{}.pdf".format("http://95.111.235.214:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/ordencompra_{}.pdf".format("http://95.111.235.214:80", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-                # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-                # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+                # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+                # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
 
         else:
             return "Error Controlado"
@@ -320,12 +320,12 @@ def cartacaract(orden, tipo):
                         rendered, pdffile, options=options, configuration=config)
                     return {
                         "codRes": "00",
-                        "message": "{}/gnrpdf/fileserver/carta_caract_{}.pdf".format("http://95.111.235.214:5238", orden)
+                        "message": "{}/gnrpdf/fileserver/carta_caract_{}.pdf".format("http://95.111.235.214:80", orden)
                     }
                 # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-                # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-                # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+                # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+                # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
 
         else:
             return "Error Controlado"
@@ -477,7 +477,7 @@ def reporte_equas(lote, tipo):
             rendered = render_template('reporte_equas_new.html', INFO_list=INFO_list, punto_muestreo_newlist=punto_muestreo_newlist,
                                        count_list=count_list, json=response, lotes_newlist=lotes_newlist,
                                        unidades=nueva_unidad, cant_lotes=cant_lotes, parametros=parametros_newlist, fecha=fechaactual,
-                                       logo="http://127.0.0.1:5238/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
+                                       logo="http://127.0.0.1:80/gnrpdf/fileserver/{}.png".format("logo_equas_solid"), )
 
             if tipo == "1":
                 pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
@@ -491,12 +491,12 @@ def reporte_equas(lote, tipo):
                     rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
-                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:5238", lote)
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:80", lote)
                 }
             # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-            # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-            # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+            # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+            # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
 
 
         else:
@@ -523,7 +523,7 @@ def generarreporte(tipo):
             'footer-font-size': '10',
             'header-font-size': '10',
             # 'footer-center' : 'asdasdasd',
-            'footer-html': 'http://127.0.0.1:5238/gnrpdf/static/footer_multi.html',
+            'footer-html': 'http://127.0.0.1:80/gnrpdf/static/footer_multi.html',
             # 'margin-top': '0.2in',
             # 'margin-right': '0.0in',
             # 'margin-bottom': '0.3in',
@@ -586,7 +586,7 @@ def generarreporte(tipo):
                     rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
-                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:5238", name)
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:80", name)
                 }
             # aranex
             if tipo == "3":
@@ -611,12 +611,12 @@ def generarreporte(tipo):
                     rendered, pdffile, options=options, configuration=config)
                 return {
                     "codRes": "00",
-                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:5238", name)
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:80", name)
                 }
             # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-            # return "http://95.111.235.214:5238/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-            # return "http://127.0.0.1:5238/fileserver/{}.pdf".format("prueba")
+            # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
+            # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
 
         # else:
         #     return "Error Controlado"
@@ -629,4 +629,4 @@ def generarreporte(tipo):
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5238, host="0.0.0.0")
+    app.run(debug=True, port=80, host="0.0.0.0")
