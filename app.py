@@ -562,18 +562,51 @@ def generarreporte(tipo):
             print(fechaactual)
             print("_json['img']", _json['img'])
             logo = "https://api.apps.com.pe/servermultiblanco/files/{}".format(_json['img'])
-            if len(_json['img']) > 1:
-                rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual, logo=logo)
-            else:
-                rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual)
+
+            # reparalia
             if tipo == "1":
+                if len(_json['img']) > 1:
+                    rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual, logo=logo)
+                else:
+                    rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual)
                 pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
                     rendered, False, options=options, configuration=config)
                 response = make_response(pdf)
                 response.headers['Content-Type'] = 'aplication/pdf'
                 response.headers['Content-Disposition'] = 'attachment; filename=reporte_multi_blanco_{}.pdf'.format(name)
                 return response
+            
+            # reparalia
             if tipo == "2":
+                if len(_json['img']) > 1:
+                    rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual, logo=logo)
+                else:
+                    rendered = render_template('reportemulti.html', json=_json, fecha=fechaactual)
+                pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, pdffile, options=options, configuration=config)
+                return {
+                    "codRes": "00",
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:5238", name)
+                }
+            # aranex
+            if tipo == "3":
+                if len(_json['img']) > 1:
+                    rendered = render_template('aranex.html', json=_json, fecha=fechaactual, logo=logo)
+                else:
+                    rendered = render_template('aranex.html', json=_json, fecha=fechaactual)
+                pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, False, options=options, configuration=config)
+                response = make_response(pdf)
+                response.headers['Content-Type'] = 'aplication/pdf'
+                response.headers['Content-Disposition'] = 'attachment; filename=reporte_aranex_{}.pdf'.format(name)
+                return response
+
+            # aranex
+            if tipo == "4":
+                if len(_json['img']) > 1:
+                    rendered = render_template('aranex.html', json=_json, fecha=fechaactual, logo=logo)
+                else:
+                    rendered = render_template('aranex.html', json=_json, fecha=fechaactual)
                 pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
                     rendered, pdffile, options=options, configuration=config)
                 return {
