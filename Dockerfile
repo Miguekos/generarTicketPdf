@@ -8,6 +8,7 @@ RUN apt-get update && apt-get install -y \
     xfonts-base \
     libxrender1 \
     libfontconfig1 \
+    fontconfig \
     libx11-dev \
     libjpeg62-turbo \
     libxext6 \
@@ -15,8 +16,10 @@ RUN apt-get update && apt-get install -y \
 
 # Install wkhtmltopdf
 RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb \
-    && dpkg -i wkhtmltox_0.12.6.1-2.bullseye_amd64.deb \
-    && rm wkhtmltox_0.12.6.1-2.bullseye_amd64.deb
+    && apt-get update \
+    && apt-get install -y ./wkhtmltox_0.12.6.1-2.bullseye_amd64.deb \
+    && rm wkhtmltox_0.12.6.1-2.bullseye_amd64.deb \
+    && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
