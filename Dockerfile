@@ -1,4 +1,4 @@
-FROM python:3.8-slim-buster
+FROM python:3.8-slim-bullseye
 
 # Install system dependencies for wkhtmltopdf and essential tools
 RUN apt-get update && apt-get install -y \
@@ -14,9 +14,9 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Install wkhtmltopdf
-RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb \
-    && dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb \
-    && rm wkhtmltox_0.12.6-1.buster_amd64.deb
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-2/wkhtmltox_0.12.6.1-2.bullseye_amd64.deb \
+    && dpkg -i wkhtmltox_0.12.6.1-2.bullseye_amd64.deb \
+    && rm wkhtmltox_0.12.6.1-2.bullseye_amd64.deb
 
 WORKDIR /app
 
