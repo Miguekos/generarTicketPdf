@@ -615,7 +615,7 @@ def generarreporte(tipo):
                 }
 
             # reparatodo
-            if tipo == "3":
+            if tipo == "5":
                 if len(_json['img']) > 1:
                     rendered = render_template('reparatodo.html', json=_json, fecha=fechaactual, logo=logo)
                 else:
@@ -628,7 +628,7 @@ def generarreporte(tipo):
                 return response
 
             # reparatodo
-            if tipo == "4":
+            if tipo == "6":
                 if len(_json['img']) > 1:
                     rendered = render_template('reparatodo.html', json=_json, fecha=fechaactual, logo=logo)
                 else:
