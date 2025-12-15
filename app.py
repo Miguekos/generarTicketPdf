@@ -613,13 +613,33 @@ def generarreporte(tipo):
                     "codRes": "00",
                     "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:80", name)
                 }
-            # pdf = pdfkit.from_string(rendered, pdffile, options=options, configuration=config)
 
-            # return "http://95.111.235.214:80/fileserver/tickets/{}.pdf".format(_json['registro']['registro'])
-            # return "http://127.0.0.1:80/fileserver/{}.pdf".format("prueba")
+            # reparatodo
+            if tipo == "3":
+                if len(_json['img']) > 1:
+                    rendered = render_template('reparatodo.html', json=_json, fecha=fechaactual, logo=logo)
+                else:
+                    rendered = render_template('reparatodo.html', json=_json, fecha=fechaactual)
+                pdf = pdfkit.from_string(rendered, False, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, False, options=options, configuration=config)
+                response = make_response(pdf)
+                response.headers['Content-Type'] = 'aplication/pdf'
+                response.headers['Content-Disposition'] = 'attachment; filename=reporte_aranex_{}.pdf'.format(name)
+                return response
 
-        # else:
-        #     return "Error Controlado"
+            # reparatodo
+            if tipo == "4":
+                if len(_json['img']) > 1:
+                    rendered = render_template('reparatodo.html', json=_json, fecha=fechaactual, logo=logo)
+                else:
+                    rendered = render_template('reparatodo.html', json=_json, fecha=fechaactual)
+                pdfkit.from_string(rendered, pdffile, options=options) if os.name != "nt" else pdfkit.from_string(
+                    rendered, pdffile, options=options, configuration=config)
+                return {
+                    "codRes": "00",
+                    "message": "{}/gnrpdf/fileserver/{}.pdf".format("http://95.111.235.214:80", name)
+                }
+            
     except ValueError:
         print(ValueError)
         return {

@@ -1,20 +1,36 @@
-FROM python:3.6
+FROM python:3.8-slim-buster
 
-COPY ["requeriments.txt" ,  "/app/"]
+# Install system dependencies for wkhtmltopdf and essential tools
+RUN apt-get update && apt-get install -y \
+    wget \
+    build-essential \
+    xfonts-75dpi \
+    xfonts-base \
+    libxrender1 \
+    libfontconfig1 \
+    libx11-dev \
+    libjpeg62-turbo \
+    libxext6 \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install wkhtmltopdf
+RUN wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && rm wkhtmltox_0.12.6-1.buster_amd64.deb
 
 WORKDIR /app
 
-ADD https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb /app
-RUN apt-get update
-#RUN apt-get install wkhtmltopdf -y
-RUN ls -lth
-RUN apt-get install -y xfonts-75dpi xfonts-base
-RUN dpkg -i wkhtmltox_0.12.6-1.buster_amd64.deb
-RUN pip install -r requeriments.txt
+# Copy requirements file (note the filename in your repo is requeriments.txt)
+COPY requeriments.txt .
 
-COPY ["." ,  "/app/"]
-#COPY . /app
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requeriments.txt
 
+# Copy application code
+COPY . .
+
+# Expose port 80
 EXPOSE 80
 
-#CMD [ "python" , "app.py" ]
+# Command to run the application
+CMD ["python", "app.py"]
