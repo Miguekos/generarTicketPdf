@@ -10,4 +10,4 @@ services:
     volumes:
       - /usr/local/volumes/fileserver/generarpdf_generico/:/app/fileserver/
     ports:
-      - "5238:5238"
+      - "5238:80"
